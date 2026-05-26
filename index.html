@@ -6,82 +6,286 @@
 <title>Green Desert Life</title>
 
 <style>
+*{box-sizing:border-box}
+
 body{
     margin:0;
     font-family:Arial, sans-serif;
-    background: linear-gradient(to bottom, #d8c3a5, #f4e1c1);
-    color:#2d4d2a;
-    text-align:center;
+    background:linear-gradient(180deg,#efe2ca,#d7bd8d);
+    color:#183d2b;
+}
+
+nav{
+    position:sticky;
+    top:0;
+    background:rgba(239,226,202,0.92);
+    backdrop-filter:blur(10px);
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid rgba(24,61,43,0.15);
+    z-index:10;
+}
+
+nav .brand{
+    font-weight:bold;
+    letter-spacing:3px;
+}
+
+nav a{
+    color:#183d2b;
+    text-decoration:none;
+    margin-left:22px;
+    font-size:14px;
 }
 
 header{
-    padding:80px 20px;
-}
-
-h1{
-    font-size:60px;
-    margin-bottom:10px;
-}
-
-p{
-    font-size:22px;
+    text-align:center;
+    padding:80px 20px 90px;
 }
 
 .logo{
-    width:180px;
-    margin-bottom:20px;
+    width:240px;
+    max-width:80%;
+    border-radius:16px;
+    margin-bottom:28px;
+    box-shadow:0 18px 45px rgba(0,0,0,0.14);
 }
 
-.section{
-    padding:60px 20px;
+h1{
+    font-size:54px;
+    letter-spacing:8px;
+    margin:0;
+}
+
+.slogan{
+    font-size:21px;
+    margin-top:18px;
+    color:#4c5c3e;
+}
+
+.hero-text{
+    max-width:720px;
+    margin:32px auto 0;
+    font-size:18px;
+    line-height:1.8;
+    color:#40513a;
+}
+
+.buttons{
+    margin-top:35px;
+}
+
+.btn{
+    display:inline-block;
+    padding:14px 28px;
+    margin:8px;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.primary{
+    background:#183d2b;
+    color:#f5ead5;
+}
+
+.secondary{
+    border:1px solid #183d2b;
+    color:#183d2b;
+}
+
+section{
+    padding:70px 8%;
+}
+
+.section-title{
+    text-align:center;
+    font-size:34px;
+    margin-bottom:45px;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:25px;
 }
 
 .card{
-    background:white;
-    margin:20px auto;
-    max-width:500px;
+    background:rgba(255,255,255,0.72);
     padding:30px;
-    border-radius:20px;
-    box-shadow:0 0 20px rgba(0,0,0,0.1);
+    border-radius:24px;
+    text-align:center;
+    box-shadow:0 15px 35px rgba(0,0,0,0.10);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+}
+
+.card h3{
+    font-size:23px;
+}
+
+.card p{
+    color:#4b5542;
+    line-height:1.7;
+}
+
+.price{
+    font-weight:bold;
+    margin:18px 0;
+}
+
+.buy{
+    display:inline-block;
+    background:#183d2b;
+    color:white;
+    padding:11px 22px;
+    border-radius:24px;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.story{
+    background:rgba(255,255,255,0.45);
+    border-radius:30px;
+    max-width:950px;
+    margin:auto;
+    padding:45px;
+    line-height:1.9;
+    font-size:18px;
+    text-align:center;
+}
+
+.whatsapp{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    background:#25D366;
+    color:white;
+    padding:15px 22px;
+    border-radius:40px;
+    text-decoration:none;
+    font-weight:bold;
+    box-shadow:0 10px 25px rgba(0,0,0,0.25);
 }
 
 footer{
-    padding:30px;
-    background:#2d4d2a;
-    color:white;
+    background:#183d2b;
+    color:#f5ead5;
+    text-align:center;
+    padding:35px;
+}
+
+@media(max-width:700px){
+    nav{
+        flex-direction:column;
+        gap:12px;
+    }
+
+    nav a{
+        margin:0 8px;
+    }
+
+    h1{
+        font-size:34px;
+        letter-spacing:4px;
+    }
+
+    .logo{
+        width:190px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<header> 
-   <img src="logo1.png" alt="Logo" width="180">
+<nav>
+    <div class="brand">GREENDESERT LIFE</div>
+    <div>
+        <a href="#">Ana Sayfa</a>
+        <a href="#urunler">Ürünler</a>
+        <a href="#hikaye">Hakkımızda</a>
+        <a href="#iletisim">İletişim</a>
+    </div>
+</nav>
+
+<header>
+    <img src="logo1.png" alt="Green Desert Life Logo" class="logo">
     <h1>GREEN DESERT LIFE</h1>
-    <p>Doğanın Sırrı • Yaşamın Uyanışı</p>
+    <div class="slogan">Doğanın Sırrı • Yaşamın Uyanışı</div>
+
+    <p class="hero-text">
+        Çölün sessizliğinden, yeşilin uyanışına uzanan doğal yaşam markası.
+        Kayısı, dağ çayı, lavanta ve dağ kekiğiyle doğadan gelen sade, temiz ve seçkin ürünler.
+    </p>
+
+    <div class="buttons">
+        <a href="#urunler" class="btn primary">Ürünleri Keşfet</a>
+        <a href="#hikaye" class="btn secondary">Marka Hikayesi</a>
+    </div>
 </header>
 
-<div class="section">
+<section id="urunler">
+    <h2 class="section-title">Doğal Ürünler</h2>
 
-    <div class="card">
-        <h2>Kayısı</h2>
-        <p>Doğal ve geleneksel üretim.</p>
+    <div class="products">
+        <div class="card">
+            <h3>Kayısı</h3>
+            <p>Malatya’nın güneşiyle olgunlaşan doğal kayısı ürünleri.</p>
+            <div class="price">Yakında satışta</div>
+            <a class="buy" href="#">İncele</a>
+        </div>
+
+        <div class="card">
+            <h3>Dağ Çayı</h3>
+            <p>Yüksek rakımın ferah ve sade aromasını taşıyan bitki çayı.</p>
+            <div class="price">Yakında satışta</div>
+            <a class="buy" href="#">İncele</a>
+        </div>
+
+        <div class="card">
+            <h3>Lavanta</h3>
+            <p>Doğal kokusu ve sakinleştirici atmosferiyle lavanta ürünleri.</p>
+            <div class="price">Yakında satışta</div>
+            <a class="buy" href="#">İncele</a>
+        </div>
+
+        <div class="card">
+            <h3>Dağ Kekiği</h3>
+            <p>Doğadan gelen güçlü aroma ve geleneksel lezzet.</p>
+            <div class="price">Yakında satışta</div>
+            <a class="buy" href="#">İncele</a>
+        </div>
     </div>
+</section>
 
-    <div class="card">
-        <h2>Dağ Çayı</h2>
-        <p>Yüksek rakımın saf aroması.</p>
+<section id="hikaye">
+    <h2 class="section-title">Marka Hikayesi</h2>
+
+    <div class="story">
+        Greendesert Life, çölün zorlu sessizliği içinde yeşeren yaşam fikrinden doğdu.
+        Logodaki yeşil yaprak; uyanışı, doğanın sırrını ve yeniden canlanmayı temsil eder.
+        Kum tonları toprağı ve doğallığı, mavi geçiş ise yaşamın kaynağı olan suyu simgeler.
     </div>
+</section>
 
-    <div class="card">
-        <h2>Lavanta</h2>
-        <p>Doğanın huzur veren kokusu.</p>
+<section id="iletisim">
+    <h2 class="section-title">İletişim</h2>
+
+    <div class="story">
+        Sipariş, ürün bilgisi ve iş birliği için bizimle WhatsApp üzerinden iletişime geçebilirsiniz.
     </div>
+</section>
 
-</div>
+<a class="whatsapp" href="https://wa.me/905000000000" target="_blank">WhatsApp</a>
 
 <footer>
-    © 2026 Green Desert Life
+    © 2026 Green Desert Life — Doğanın Sırrı. Yaşamın Uyanışı.
 </footer>
 
 </body>
