@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+</body><!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
@@ -448,6 +448,48 @@ footer{
 <footer>
     © 2026 Green Desert Life — Doğanın Sırrı. Yaşamın Uyanışı.
 </footer>
+<script>
 
+const images = [
+  "/images/1.jpg",
+  "/images/2.jpg",
+  "/images/3.jpg",
+  "/images/4.jpg",
+  "/images/5.jpg",
+  "/images/7.jpg",
+  "/images/9.jpg",
+  "/images/12.jpg",
+  "/images/15.jpg",
+  "/images/16.jpg",
+  "/images/18.jpg",
+  "/images/22.jpg",
+  "/images/24.jpg",
+  "/images/28.jpg",
+  "/images/31.jpg",
+  "/images/32.jpg",
+];
+
+let current = 0;
+
+const hero = document.querySelector("header");
+
+function changeBackground() {
+
+  hero.style.backgroundImage =
+    `linear-gradient(rgba(0,0,0,0.35),
+     rgba(0,0,0,0.35)),
+     url('${images[current]}')`;
+
+  hero.style.backgroundSize = "cover";
+  hero.style.backgroundPosition = "center";
+
+  current = (current + 1) % images.length;
+}
+
+changeBackground();
+
+setInterval(changeBackground, 4000);
+
+</script>
 </body>
 </html>
