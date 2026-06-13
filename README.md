@@ -1,25 +1,38 @@
 # Green Desert Life
 
-Green Desert Life bir coğrafya tanımı değil, bir yaşam metaforudur.
+Green Desert Life, Malatya merkezli doğa odaklı bir marka ve statik web sitesi projesidir.
 
-Bu isimdeki "çöl", yaşamın karşısına çıkan zorlukları, mücadeleyi ve sınanmaları temsil eder. "Yeşil" ise tüm bu zorluklara rağmen filizlenen umudu, üretimi ve yeniden doğuşu simgeler.
+Proje; yerel üretim, sürdürülebilir yaşam, doğal ürünler ve etik ticaret ilkelerini bir araya getirir. Site, klasik bir e-ticaret deneyiminden çok doğayla, üreticiyle ve markanın yaşam felsefesiyle bağ kuran sade bir dijital vitrin olarak tasarlanmıştır.
 
-Green Desert Life, çölün ortasında yeşeren bir tohumun hikâyesidir.
+## Ana Ürünler
 
-Doğada hiçbir şey tek başına var olmaz. Kuraklık ve bereket, yokluk ve bolluk, mücadele ve umut aynı yaşam döngüsünün parçalarıdır. Bizler de doğanın sunduğu armağanları en doğal haliyle insanlara ulaştırmak amacıyla yola çıktık.
+- Kayısı
+- Dağ çayı
+- Lavanta
+- Dağ kekiği
 
-Kayısının bereketini, dağ çayının ferahlığını, lavantanın huzurunu, dağ kekiğinin kokusunu ve doğanın milyonlarca yılda şekillendirdiği taşları paylaşırken aklımızda tek bir düşünce vardır:
+## Marka Yaklaşımı
 
-> Bizler o büyük organizmanın küçük bir parçasıyız.
+Green Desert Life için "çöl", yaşamın karşısına çıkan zorlukları; "yeşil" ise bu zorluklara rağmen filizlenen umudu, üretimi ve yeniden doğuşu temsil eder.
 
-Green Desert Life yalnızca bir satış platformu değil; doğayla uyumlu yaşamı, emeğe saygıyı ve Anadolu'nun köklü Ahilik geleneğinden ilham alan adil ticaret anlayışını yaşatmayı amaçlayan bir yolculuktur.
+Marka dili; doğallık, güven, sadelik, yerel bilgi, emek ve Ahilik geleneğinden ilham alan adil ticaret anlayışı üzerine kuruludur.
 
-## Mottomuz
+Motto:
 
-> Adil dükkânda pazarlık olmaz.
+> Adil dükkanda pazarlık olmaz.
 
-## Proje Belgeleri
+## Site Yapısı
 
-* `PROJECT_NOTES.md` → Proje ve tasarım kuralları
-* `MARKA_MANIFESTOSU.md` → Marka felsefesi ve kimliği
-* `index.html` → Ana site dosyası
+- `index.html`: Ana statik web sayfası.
+- `PROJECT_NOTES.md`: Proje kuralları, tasarım ilkeleri ve geliştirme notları.
+- `MARKA_MANIFESTOSU.md`: Marka felsefesi ve anlatı çerçevesi.
+- Görsel dosyalar: Logo, doğa, ürün ve yerel üretim atmosferini destekleyen medya varlıkları.
+
+## Geliştirme İlkeleri
+
+- Mevcut tasarım dili korunmalıdır.
+- Gereksiz framework veya bağımlılık eklenmemelidir.
+- Vercel uyumluluğu korunmalıdır.
+- Görseller optimize edilmeli ve gerçek dosya yollarıyla kullanılmalıdır.
+- İçerik agresif satış dilinden uzak, hikaye ve güven odaklı olmalıdır.
+- Büyük tasarım veya içerik değişikliklerinden önce `PROJECT_NOTES.md` ve `MARKA_MANIFESTOSU.md` okunmalıdır.
