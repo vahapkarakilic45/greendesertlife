@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Höyük, tümülüs, antik yerleşim ve mineral potansiyeli için masaüstü uzaktan algılama prototipi.">
+<title>Arkeolojik Uzaktan Algılama Prototipi</title>
+<style>
+:root{
+    --forest:#183d2b;
+    --leaf:#2e7d32;
+    --earth:#8d5d36;
+    --clay:#c9824a;
+    --sand:#ead7b8;
+    --cream:#f7f0e4;
+    --stone:#66716a;
+    --ink:#17241d;
+    --muted:#647066;
+    --line:rgba(23,36,29,.16);
+    --danger:#b64b35;
+    --gold:#d1a23d;
+    --blue:#3f8fb5;
+    --shadow:0 16px 38px rgba(24,61,43,.14);
+}
+
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f2eadb;
+    color:var(--ink);
+}
+
+button,input,select,textarea{font:inherit}
+button{border:0;cursor:pointer}
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:10;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding:14px 6%;
+    background:rgba(247,240,228,.94);
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(12px);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.brand img{
+    width:42px;
+    height:42px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+.brand strong{
+    display:block;
+    font-size:14px;
+    letter-spacing:1.4px;
+}
+
+.brand span{
+    display:block;
+    margin-top:2px;
+    color:var(--muted);
+    font-size:12px;
+}
+
+.nav-links{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+    gap:8px;
+}
+
+.nav-links a{
+    color:var(--forest);
+    text-decoration:none;
+    padding:8px 10px;
+    border-radius:6px;
+    font-size:14px;
+}
+
+.nav-links a:hover{background:rgba(46,125,50,.1)}
+
+header{
+    min-height:58vh;
+    display:grid;
+    align-items:end;
+    background:
+        linear-gradient(180deg,rgba(23,36,29,.18),rgba(23,36,29,.82)),
+        url("16.jpeg") center/cover;
+    color:white;
+}
+
+.hero{
+    width:min(1120px,88vw);
+    margin:0 auto;
+    padding:76px 0 46px;
+}
+
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:7px 11px;
+    border:1px solid rgba(255,255,255,.36);
+    border-radius:999px;
+    background:rgba(255,255,255,.12);
+    font-size:13px;
+}
+
+.pulse{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#e6b85c;
+    box-shadow:0 0 0 7px rgba(230,184,92,.22);
+}
+
+h1{
+    max-width:900px;
+    margin:22px 0 14px;
+    font-size:clamp(36px,6vw,70px);
+    line-height:1.02;
+    letter-spacing:0;
+}
+
+.hero p{
+    max-width:760px;
+    margin:0;
+    color:#f5ead5;
+    font-size:19px;
+    line-height:1.65;
+}
+
+.hero-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:28px;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:44px;
+    padding:12px 18px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:700;
+}
+
+.btn.primary{background:#f5ead5;color:var(--forest)}
+.btn.secondary{border:1px solid rgba(255,255,255,.5);color:white}
+
+main{padding:42px 6% 70px}
+
+.workspace{
+    display:grid;
+    grid-template-columns:minmax(290px,370px) minmax(0,1fr);
+    gap:22px;
+    align-items:start;
+}
+
+.panel,.map-shell,.metric,.insight,.upload-box,.candidate{
+    background:rgba(255,255,255,.78);
+    border:1px solid rgba(24,61,43,.13);
+    border-radius:8px;
+    box-shadow:var(--shadow);
+}
+
+.panel{
+    position:sticky;
+    top:88px;
+    padding:20px;
+}
+
+.panel h2,.section-head h2{
+    margin:0;
+    color:var(--forest);
+    font-size:25px;
+}
+
+.panel p,.section-head p{
+    color:var(--muted);
+    line-height:1.6;
+}
+
+.field{margin-top:16px}
+
+label{
+    display:block;
+    margin-bottom:7px;
+    color:#34483b;
+    font-size:13px;
+    font-weight:700;
+}
+
+select,input[type="text"],input[type="range"],textarea{
+    width:100%;
+}
+
+select,input[type="text"],textarea{
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:#fffdf8;
+    color:var(--ink);
+    padding:12px;
+}
+
+textarea{
+    min-height:86px;
+    resize:vertical;
+}
+
+.control-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-top:8px;
+    color:var(--muted);
+    font-size:13px;
+}
+
+.run{
+    width:100%;
+    margin-top:18px;
+    min-height:46px;
+    border-radius:8px;
+    background:var(--forest);
+    color:white;
+    font-weight:700;
+}
+
+.map-shell{overflow:hidden}
+
+.toolbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    padding:14px;
+    border-bottom:1px solid var(--line);
+}
+
+.tabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.tab{
+    min-height:36px;
+    padding:8px 11px;
+    border-radius:8px;
+    background:#edf1e8;
+    color:var(--forest);
+    font-size:13px;
+    font-weight:700;
+}
+
+.tab.active{background:var(--forest);color:white}
+
+.scene-info{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.map{
+    position:relative;
+    min-height:540px;
+    overflow:hidden;
+    background:
+        linear-gradient(90deg,rgba(255,255,255,.16) 1px,transparent 1px),
+        linear-gradient(rgba(255,255,255,.16) 1px,transparent 1px),
+        radial-gradient(circle at 24% 28%,rgba(193,130,74,.82),transparent 14%),
+        radial-gradient(circle at 67% 58%,rgba(46,125,50,.62),transparent 22%),
+        radial-gradient(circle at 42% 72%,rgba(102,113,106,.74),transparent 17%),
+        linear-gradient(135deg,#8a9b68,#d6b978 48%,#6e8c5a);
+    background-size:68px 68px,68px 68px,100% 100%,100% 100%,100% 100%,100% 100%;
+}
+
+.map::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:var(--layer,linear-gradient(120deg,rgba(182,75,53,.32),rgba(209,162,61,.2),rgba(63,143,181,.14)));
+    mix-blend-mode:multiply;
+}
+
+.scan-line{
+    position:absolute;
+    left:0;
+    right:0;
+    top:18%;
+    z-index:2;
+    height:4px;
+    background:rgba(255,255,255,.72);
+    box-shadow:0 0 24px rgba(230,184,92,.9);
+    animation:scan 4.6s ease-in-out infinite;
+}
+
+@keyframes scan{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(350px)}
+}
+
+.target{
+    position:absolute;
+    z-index:4;
+    border:2px solid rgba(255,255,255,.9);
+    background:rgba(255,255,255,.08);
+    box-shadow:0 0 0 999px rgba(0,0,0,0);
+}
+
+.target::after{
+    content:attr(data-label);
+    position:absolute;
+    left:50%;
+    bottom:-30px;
+    transform:translateX(-50%);
+    min-width:max-content;
+    padding:5px 8px;
+    border-radius:6px;
+    background:rgba(247,240,228,.95);
+    color:var(--forest);
+    font-size:12px;
+    font-weight:700;
+}
+
+.mound{left:17%;top:18%;width:140px;height:106px;border-radius:50%}
+.tumulus{right:18%;top:28%;width:118px;height:118px;border-radius:50%}
+.settlement{left:43%;bottom:17%;width:190px;height:115px;border-radius:6px}
+.mineral{right:28%;bottom:17%;width:150px;height:56px;border-radius:999px;transform:rotate(-18deg)}
+
+.target.high{border-color:#f0cc6a}
+.target.mid{border-color:#fff}
+.target.low{border-color:#9ed1e6}
+
+.legend{
+    position:absolute;
+    z-index:5;
+    left:16px;
+    bottom:16px;
+    width:min(380px,calc(100% - 32px));
+    padding:14px;
+    border-radius:8px;
+    background:rgba(247,240,228,.93);
+    border:1px solid rgba(24,61,43,.16);
+}
+
+.legend strong{color:var(--forest)}
+
+.scale{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    height:10px;
+    margin:10px 0 8px;
+    border-radius:999px;
+    overflow:hidden;
+}
+
+.scale span:nth-child(1){background:#5f6c60}
+.scale span:nth-child(2){background:#8d5d36}
+.scale span:nth-child(3){background:#c9824a}
+.scale span:nth-child(4){background:#d1a23d}
+.scale span:nth-child(5){background:#b64b35}
+
+.legend-row{
+    display:flex;
+    justify-content:space-between;
+    color:var(--muted);
+    font-size:12px;
+}
+
+.metrics{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(140px,1fr));
+    gap:14px;
+    margin-top:18px;
+}
+
+.metric{padding:16px}
+.metric span{color:var(--muted);font-size:13px}
+.metric strong{display:block;margin-top:8px;color:var(--forest);font-size:30px}
+.metric small{display:block;margin-top:5px;color:#49614d}
+
+.section-head{
+    width:min(1040px,100%);
+    margin:52px 0 20px;
+}
+
+.candidates{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.candidate{padding:16px}
+.candidate b{display:block;color:var(--forest);font-size:16px}
+.candidate p{margin:9px 0 0;color:var(--muted);line-height:1.55;font-size:14px}
+.score{display:inline-flex;margin-bottom:10px;padding:5px 8px;border-radius:999px;background:#edf1e8;color:var(--forest);font-weight:700;font-size:13px}
+
+.insights{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.insight{padding:20px}
+.insight h3{margin:0 0 9px;color:var(--forest)}
+.insight p{margin:0;color:var(--muted);line-height:1.65}
+
+.upload-grid{
+    display:grid;
+    grid-template-columns:minmax(280px,420px) minmax(0,1fr);
+    gap:18px;
+}
+
+.upload-box{padding:20px}
+
+.drop{
+    display:grid;
+    place-items:center;
+    min-height:210px;
+    border:2px dashed rgba(24,61,43,.27);
+    border-radius:8px;
+    background:#fffdf8;
+    text-align:center;
+    padding:22px;
+}
+
+.drop input{margin-top:16px}
+
+canvas{
+    width:100%;
+    max-height:420px;
+    background:#efe6d5;
+    border-radius:8px;
+}
+
+.report{
+    margin-top:14px;
+    padding:13px;
+    border-radius:8px;
+    background:#edf1e8;
+    color:#34483b;
+    line-height:1.55;
+}
+
+.analysis-summary{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-top:14px;
+}
+
+.analysis-pill{
+    padding:10px;
+    border-radius:8px;
+    background:#fffdf8;
+    border:1px solid var(--line);
+}
+
+.analysis-pill span{
+    display:block;
+    color:var(--muted);
+    font-size:12px;
+}
+
+.analysis-pill strong{
+    display:block;
+    margin-top:4px;
+    color:var(--forest);
+    font-size:22px;
+}
+
+footer{
+    padding:32px 6%;
+    background:var(--forest);
+    color:#f5ead5;
+    text-align:center;
+}
+
+@media(max-width:1080px){
+    .workspace,.upload-grid{grid-template-columns:1fr}
+    .panel{position:static}
+    .candidates{grid-template-columns:repeat(2,1fr)}
+    .insights{grid-template-columns:1fr}
+}
+
+@media(max-width:720px){
+    nav{align-items:flex-start}
+    .nav-links{justify-content:flex-start}
+    .metrics,.candidates{grid-template-columns:1fr}
+    .map{min-height:460px}
+    .hero{width:88vw;padding-top:58px}
+}
+</style>
+</head>
+<body>
+<nav>
+    <div class="brand">
+        <img src="logo1.png" alt="Green Desert Life logosu">
+        <div>
+            <strong>GREEN DESERT LIFE</strong>
+            <span>Arkeolojik Uzaktan Algılama</span>
+        </div>
+    </div>
+    <div class="nav-links">
+        <a href="#panel">Panel</a>
+        <a href="#adaylar">Aday Alanlar</a>
+        <a href="#gorsel">Görsel Analiz</a>
+        <a href="#rapor">Rapor</a>
+    </div>
+</nav>
+
+<header>
+    <div class="hero">
+        <div class="eyebrow"><span class="pulse"></span> Masaüstü kurulum için ilk prototip</div>
+        <h1>Uydu görüntüsünde doğal dokuyu bozan izleri bulun.</h1>
+        <p>Bu ekran höyük, tümülüs, antik yerleşim ve mineral potansiyeli için aday alanları bir araya getirir. Gerçek ürün, uydu bantları ve yükseklik verisiyle çalışacak bir karar destek sistemi olarak geliştirilecektir.</p>
+        <div class="hero-actions">
+            <a class="btn primary" href="#panel">Analizi Başlat</a>
+            <a class="btn secondary" href="#gorsel">Görüntü Yükle</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section id="panel" class="workspace">
+        <aside class="panel">
+            <h2>Analiz Ayarları</h2>
+            <p>Alan türünü ve duyarlılığı seçin. Prototip, olası arkeolojik ve mineral anomalilerini örnek skorlarla günceller.</p>
+
+            <div class="field">
+                <label for="mode">Aranan Hedef</label>
+                <select id="mode">
+                    <option value="all">Tüm anomaliler</option>
+                    <option value="mound">Höyük / yerleşim tepesi</option>
+                    <option value="tumulus">Tümülüs / yığma tepe</option>
+                    <option value="settlement">Antik yerleşim izi</option>
+                    <option value="mineral">Mineral / maden potansiyeli</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="source">Görüntü Kaynağı</label>
+                <select id="source">
+                    <option value="sentinel">Sentinel-2 çok bantlı</option>
+                    <option value="landsat">Landsat</option>
+                    <option value="earth">Google Earth ekran görüntüsü</option>
+                    <option value="drone">Drone / saha fotoğrafı</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="sensitivity">Duyarlılık</label>
+                <input id="sensitivity" type="range" min="20" max="90" value="64">
+                <div class="control-row"><span>Düşük yanlış alarm</span><strong id="sensitivityValue">%64</strong></div>
+            </div>
+
+            <div class="field">
+                <label for="coord">Merkez Koordinat</label>
+                <input id="coord" type="text" value="38.3552, 38.3095">
+            </div>
+
+            <div class="field">
+                <label for="notes">Saha Notu</label>
+                <textarea id="notes" placeholder="Örn. tepe formu belirgin, çevrede eski yol izi var, yüzey rengi kızıl..."></textarea>
+            </div>
+
+            <button class="run" id="runAnalysis">Adayları Güncelle</button>
+        </aside>
+
+        <div>
+            <div class="map-shell">
+                <div class="toolbar">
+                    <div class="tabs" role="tablist" aria-label="Analiz katmanları">
+                        <button class="tab active" data-layer="anomaly">Anomali</button>
+                        <button class="tab" data-layer="shape">Form</button>
+                        <button class="tab" data-layer="mineral">Mineral</button>
+                        <button class="tab" data-layer="rgb">Doğal Renk</button>
+                    </div>
+                    <div class="scene-info" id="sceneInfo">Sahne hazırlanıyor</div>
+                </div>
+                <div class="map" id="map">
+                    <div class="scan-line"></div>
+                    <div class="target mound high" data-kind="mound" data-label="Höyük Adayı"></div>
+                    <div class="target tumulus mid" data-kind="tumulus" data-label="Tümülüs Formu"></div>
+                    <div class="target settlement mid" data-kind="settlement" data-label="Yerleşim İzi"></div>
+                    <div class="target mineral low" data-kind="mineral" data-label="Mineral Hattı"></div>
+                    <div class="legend">
+                        <strong id="legendTitle">Arkeolojik Anomali Yoğunluğu</strong>
+                        <div class="scale"><span></span><span></span><span></span><span></span><span></span></div>
+                        <div class="legend-row"><span>Düşük</span><span>İzlenebilir</span><span>Yüksek</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metrics">
+                <div class="metric"><span>Arkeolojik Skor</span><strong id="archScore">82</strong><small>Yüksek öncelik</small></div>
+                <div class="metric"><span>Form Uyumu</span><strong id="shapeScore">76</strong><small>Dairesel/oval iz</small></div>
+                <div class="metric"><span>Mineral Skoru</span><strong id="mineralScore">58</strong><small>Orta potansiyel</small></div>
+                <div class="metric"><span>Saha Önceliği</span><strong id="priorityScore">A1</strong><small>Yerinde kontrol</small></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="adaylar">
+        <div class="section-head">
+            <h2>Aday Alanlar</h2>
+            <p>Programın amacı tek bir kesin sonuç vermek değil; kontrol edilmesi gereken noktaları güven skoruyla sıralamaktır.</p>
+        </div>
+        <div class="candidates">
+            <article class="candidate">
+                <span class="score" id="candidateOneScore">82/100</span>
+                <b>Höyük adayı</b>
+                <p id="candidateOneText">Oval yükselti, çevreden ayrışan açık/kızıl toprak ve bitki yoğunluğu farkı birlikte görülüyor.</p>
+            </article>
+            <article class="candidate">
+                <span class="score" id="candidateTwoScore">74/100</span>
+                <b>Tümülüs formu</b>
+                <p id="candidateTwoText">Dairesel sınır ve gölge-yamaç düzeni doğal sırt çizgisinden ayrışıyor.</p>
+            </article>
+            <article class="candidate">
+                <span class="score" id="candidateThreeScore">66/100</span>
+                <b>Yerleşim izi</b>
+                <p id="candidateThreeText">Doğrusal lekeler ve dik açıya yakın kırılmalar eski yapı sınırı olasılığı oluşturuyor.</p>
+            </article>
+            <article class="candidate">
+                <span class="score" id="candidateFourScore">58/100</span>
+                <b>Mineral hattı</b>
+                <p id="candidateFourText">Kızıl/kahverengi yüzey ayrışması ve çizgisel doku mineral potansiyeli olarak izlenebilir.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="gorsel">
+        <div class="section-head">
+            <h2>Görsel Analiz</h2>
+            <p>JPG veya PNG yükleyin. Bu prototip renk ve kenar yoğunluğu üzerinden ilk ön değerlendirme yapar; gerçek sürümde koordinatlı raster ve çok bantlı analiz eklenecektir.</p>
+        </div>
+        <div class="upload-grid">
+            <div class="upload-box">
+                <div class="drop">
+                    <div>
+                        <strong>Uydu, drone veya saha görseli seçin</strong>
+                        <p>Görüntü yalnızca bu ekranda işlenir; sunucuya gönderilmez.</p>
+                        <input id="imageInput" type="file" accept="image/*">
+                    </div>
+                </div>
+                <div class="report" id="imageReport">Henüz görsel yüklenmedi. Örnek ön analiz için bir görüntü seçebilirsiniz.</div>
+                <div class="analysis-summary">
+                    <div class="analysis-pill"><span>Arkeoloji</span><strong id="imgArch">-</strong></div>
+                    <div class="analysis-pill"><span>Mineral</span><strong id="imgMineral">-</strong></div>
+                    <div class="analysis-pill"><span>Kenar/Form</span><strong id="imgShape">-</strong></div>
+                    <div class="analysis-pill"><span>Aday Nokta</span><strong id="imgTargets">-</strong></div>
+                </div>
+            </div>
+            <div class="upload-box">
+                <canvas id="preview" width="900" height="520" aria-label="Yüklenen görsel önizleme alanı"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <section id="rapor">
+        <div class="section-head">
+            <h2>Rapor Mantığı</h2>
+            <p>Çıktı “kesin buluntu” diliyle değil, uzman saha kontrolünü hızlandıran karar destek diliyle hazırlanmalıdır.</p>
+        </div>
+        <div class="insights">
+            <article class="insight">
+                <h3 id="reportTitle">A1 öncelikli saha kontrolü</h3>
+                <p id="reportText">Oval form, çevreden ayrışan yüzey rengi ve bitki farkı aynı noktada toplandığı için ilk saha kontrolü önerilir.</p>
+            </article>
+            <article class="insight">
+                <h3>Veri Kalitesi</h3>
+                <p id="qualityText">Sentinel-2 çok bantlı veri mineral ve bitki indeksi için iyi başlangıçtır; küçük yapılar için daha yüksek çözünürlüklü görüntü gerekebilir.</p>
+            </article>
+            <article class="insight">
+                <h3>Hukuki Not</h3>
+                <p>Bu sistem izinsiz kazı veya kültür varlığına zarar verme amacıyla kullanılmamalıdır. Bulgular ilgili resmi kurumlar ve uzmanlarla değerlendirilmelidir.</p>
+            </article>
+        </div>
+    </section>
+</main>
+
+<footer>
+    © 2026 Green Desert Life - Arkeolojik ve jeolojik karar destek prototipi.
+</footer>
+
+<script>
+const profiles = {
+    all: { arch: 82, shape: 76, mineral: 58, priority: "A1", title: "A1 öncelikli saha kontrolü", text: "Oval form, çevreden ayrışan yüzey rengi ve bitki farkı aynı noktada toplandığı için ilk saha kontrolü önerilir." },
+    mound: { arch: 88, shape: 81, mineral: 43, priority: "A1", title: "Höyük adayı öne çıkıyor", text: "Oval yükselti ve toprak rengi çevre dokudan ayrışıyor. DEM veya gölge analiziyle yükselti formu doğrulanmalıdır." },
+    tumulus: { arch: 79, shape: 86, mineral: 39, priority: "A2", title: "Tümülüs formu izlenebilir", text: "Dairesel yığma görünümü ve yamaç gölge düzeni doğal sırt çizgisiyle tam uyumlu değil. Saha kontrolü önerilir." },
+    settlement: { arch: 72, shape: 68, mineral: 45, priority: "B1", title: "Yerleşim izi olasılığı", text: "Doğrusal lekeler ve keskin kırılmalar eski duvar, yol veya parsel sınırı olasılığı doğuruyor. Mevsimsel görüntülerle karşılaştırılmalıdır." },
+    mineral: { arch: 48, shape: 52, mineral: 78, priority: "M1", title: "Mineral potansiyeli öne çıkıyor", text: "Kızıl/kahverengi yüzey ayrışması ve çizgisel doku mineral veya alterasyon hattı olarak incelenebilir." }
+};
+
+const layerStyles = {
+    anomaly: { title: "Arkeolojik Anomali Yoğunluğu", gradient: "linear-gradient(120deg,rgba(182,75,53,.32),rgba(209,162,61,.2),rgba(63,143,181,.14))" },
+    shape: { title: "Form ve Gölge Ayrışması", gradient: "radial-gradient(circle at 24% 28%,rgba(240,204,106,.52),transparent 18%),radial-gradient(circle at 72% 38%,rgba(255,255,255,.42),transparent 16%),linear-gradient(120deg,rgba(95,108,96,.24),rgba(24,61,43,.18))" },
+    mineral: { title: "Mineral Renk Anomalisi", gradient: "linear-gradient(120deg,rgba(141,93,54,.52),rgba(201,130,74,.45),rgba(209,162,61,.25))" },
+    rgb: { title: "Doğal Renk Görünümü", gradient: "linear-gradient(120deg,rgba(255,255,255,.08),rgba(46,125,50,.12),rgba(63,143,181,.1))" }
+};
+
+function clamp(value, min, max){
+    return Math.max(min, Math.min(max, value));
+}
+
+function updateAnalysis(){
+    const mode = document.getElementById("mode").value;
+    const source = document.getElementById("source").value;
+    const sensitivity = Number(document.getElementById("sensitivity").value);
+    const notes = document.getElementById("notes").value.trim();
+    const profile = profiles[mode];
+    const sourceBoost = source === "sentinel" ? 4 : source === "landsat" ? -2 : source === "earth" ? -6 : -8;
+    const sensitivityBoost = Math.round((sensitivity - 60) / 5);
+
+    const arch = clamp(profile.arch + sourceBoost + sensitivityBoost, 0, 100);
+    const shape = clamp(profile.shape + (source === "earth" ? 2 : 0) + sensitivityBoost, 0, 100);
+    const mineral = clamp(profile.mineral + (source === "sentinel" ? 8 : 0) + Math.round(sensitivityBoost / 2), 0, 100);
+
+    document.getElementById("archScore").textContent = arch;
+    document.getElementById("shapeScore").textContent = shape;
+    document.getElementById("mineralScore").textContent = mineral;
+    document.getElementById("priorityScore").textContent = profile.priority;
+    document.getElementById("sceneInfo").textContent = `${source.toUpperCase()} | duyarlılık %${sensitivity}`;
+    document.getElementById("reportTitle").textContent = profile.title;
+    document.getElementById("reportText").textContent = notes ? `${profile.text} Saha notu: ${notes}` : profile.text;
+    document.getElementById("qualityText").textContent = source === "earth"
+        ? "Google Earth ekran görüntüsü hızlı görsel kontrol sağlar; bilimsel skor için koordinatlı ve bant bilgisi olan veri daha güvenilirdir."
+        : "Çok bantlı veya koordinatlı veri; bitki, nem ve mineral indekslerini daha güvenilir hale getirir.";
+
+    document.querySelectorAll(".target").forEach((target) => {
+        target.style.opacity = mode === "all" || target.dataset.kind === mode ? "1" : ".22";
+    });
+
+    document.getElementById("candidateOneScore").textContent = `${arch}/100`;
+    document.getElementById("candidateTwoScore").textContent = `${shape}/100`;
+    document.getElementById("candidateThreeScore").textContent = `${clamp(Math.round((arch + shape) / 2) - 8, 0, 100)}/100`;
+    document.getElementById("candidateFourScore").textContent = `${mineral}/100`;
+}
+
+document.getElementById("sensitivity").addEventListener("input", (event) => {
+    document.getElementById("sensitivityValue").textContent = `%${event.target.value}`;
+    updateAnalysis();
+});
+
+["mode","source","notes"].forEach((id) => {
+    document.getElementById(id).addEventListener("input", updateAnalysis);
+});
+
+document.getElementById("runAnalysis").addEventListener("click", updateAnalysis);
+
+document.querySelectorAll(".tab").forEach((tab) => {
+    tab.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach((item) => item.classList.remove("active"));
+        tab.classList.add("active");
+        const layer = layerStyles[tab.dataset.layer];
+        document.getElementById("map").style.setProperty("--layer", layer.gradient);
+        document.getElementById("legendTitle").textContent = layer.title;
+    });
+});
+
+const imageInput = document.getElementById("imageInput");
+const canvas = document.getElementById("preview");
+const ctx = canvas.getContext("2d");
+
+function drawPlaceholder(){
+    ctx.fillStyle = "#efe6d5";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#5f6c60";
+    ctx.font = "24px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("Görsel önizleme", canvas.width / 2, canvas.height / 2);
+}
+
+drawPlaceholder();
+
+function updateImageScoreCards(arch, mineral, shape, targets){
+    document.getElementById("imgArch").textContent = typeof arch === "number" ? `${arch}/100` : arch;
+    document.getElementById("imgMineral").textContent = typeof mineral === "number" ? `${mineral}/100` : mineral;
+    document.getElementById("imgShape").textContent = typeof shape === "number" ? `${shape}/100` : shape;
+    document.getElementById("imgTargets").textContent = targets;
+}
+
+function classifyPixel(r, g, b, previousLum){
+    const lum = (r + g + b) / 3;
+    return {
+        lum,
+        redSoil: r > g * 1.1 && g > b * .95 && r > 85,
+        brightSoil: r > 150 && g > 130 && b > 95 && Math.abs(r - g) < 75,
+        vegetation: g > r * 1.08 && g > b * 1.04,
+        darkOrWater: b > r * 1.04 && b > g * .96 || lum < 58,
+        edge: Math.abs(lum - previousLum) > 34
+    };
+}
+
+function drawDetectionBox(candidate, index){
+    const color = candidate.kind === "Mineral"
+        ? "#d1a23d"
+        : candidate.kind === "Yerleşim"
+            ? "#3f8fb5"
+            : "#f0cc6a";
+
+    ctx.save();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 4;
+    ctx.setLineDash(candidate.kind === "Mineral" ? [12, 8] : []);
+    ctx.strokeRect(candidate.x, candidate.y, candidate.w, candidate.h);
+    ctx.setLineDash([]);
+    ctx.fillStyle = "rgba(247,240,228,.95)";
+    ctx.fillRect(candidate.x, Math.max(0, candidate.y - 28), 150, 24);
+    ctx.fillStyle = "#183d2b";
+    ctx.font = "bold 14px Arial";
+    ctx.textAlign = "left";
+    ctx.fillText(`${index + 1}. ${candidate.kind} ${candidate.score}`, candidate.x + 8, Math.max(18, candidate.y - 10));
+    ctx.restore();
+}
+
+imageInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if(!file) return;
+
+    document.getElementById("imageReport").textContent = "Görüntü okunuyor ve aday alanlar aranıyor...";
+    updateImageScoreCards("-", "-", "-", "-");
+
+    const img = new Image();
+    img.onload = () => {
+        const ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
+        const width = img.width * ratio;
+        const height = img.height * ratio;
+        const x = (canvas.width - width) / 2;
+        const y = (canvas.height - height) / 2;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#efe6d5";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, x, y, width, height);
+
+        const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+        let redSoil = 0;
+        let brightSoil = 0;
+        let vegetation = 0;
+        let darkOrWater = 0;
+        let edgeLike = 0;
+        let counted = 0;
+        let prevLum = 0;
+        const cells = [];
+        const cellSize = 60;
+
+        for(let cy = y; cy < y + height; cy += cellSize){
+            for(let cx = x; cx < x + width; cx += cellSize){
+                let cellRed = 0;
+                let cellBright = 0;
+                let cellVeg = 0;
+                let cellDark = 0;
+                let cellEdge = 0;
+                let cellCount = 0;
+                let cellLum = 0;
+
+                for(let py = cy; py < Math.min(cy + cellSize, y + height); py += 4){
+                    for(let px = cx; px < Math.min(cx + cellSize, x + width); px += 4){
+                        const index = (Math.floor(py) * canvas.width + Math.floor(px)) * 4;
+                        const r = pixels[index];
+                        const g = pixels[index + 1];
+                        const b = pixels[index + 2];
+                        if(r > 238 && g > 228 && b > 205) continue;
+
+                        const sample = classifyPixel(r, g, b, prevLum);
+                        counted++;
+                        cellCount++;
+                        cellLum += sample.lum;
+                        if(sample.redSoil){ redSoil++; cellRed++; }
+                        if(sample.brightSoil){ brightSoil++; cellBright++; }
+                        if(sample.vegetation){ vegetation++; cellVeg++; }
+                        if(sample.darkOrWater){ darkOrWater++; cellDark++; }
+                        if(sample.edge){ edgeLike++; cellEdge++; }
+                        prevLum = sample.lum;
+                    }
+                }
+
+                if(cellCount > 20){
+                    const cellTotal = Math.max(cellCount, 1);
+                    const redRatio = cellRed / cellTotal;
+                    const brightRatio = cellBright / cellTotal;
+                    const vegRatio = cellVeg / cellTotal;
+                    const darkRatio = cellDark / cellTotal;
+                    const edgeRatio = cellEdge / cellTotal;
+                    const archScore = Math.round((redRatio * 34 + brightRatio * 26 + edgeRatio * 42 + Math.abs(.22 - vegRatio) * 25) * 100);
+                    const mineralScore = Math.round((redRatio * 48 + brightRatio * 18 + edgeRatio * 18 - vegRatio * 16) * 100);
+                    const settlementScore = Math.round((edgeRatio * 60 + brightRatio * 24 + darkRatio * 10) * 100);
+
+                    cells.push({
+                        x: Math.round(cx),
+                        y: Math.round(cy),
+                        w: Math.round(Math.min(cellSize, x + width - cx)),
+                        h: Math.round(Math.min(cellSize, y + height - cy)),
+                        archScore,
+                        mineralScore,
+                        settlementScore,
+                        contrast: Math.round(cellLum / cellTotal)
+                    });
+                }
+            }
+        }
+
+        const total = Math.max(counted, 1);
+        const redPct = Math.round((redSoil / total) * 100);
+        const brightPct = Math.round((brightSoil / total) * 100);
+        const vegPct = Math.round((vegetation / total) * 100);
+        const darkPct = Math.round((darkOrWater / total) * 100);
+        const edgePct = Math.round((edgeLike / total) * 100);
+        const archScore = clamp(Math.round(redPct * 1.25 + brightPct * .9 + edgePct * 1.65 - vegPct * .18 + darkPct * .2), 0, 100);
+        const mineralScore = clamp(Math.round(redPct * 1.8 + brightPct * .7 + edgePct * .75 - vegPct * .28), 0, 100);
+        const shapeScore = clamp(Math.round(edgePct * 2.1 + brightPct * .45 + Math.abs(25 - vegPct) * .35), 0, 100);
+        const allCandidates = [];
+
+        cells.forEach((cell) => {
+            if(cell.archScore > 34){
+                allCandidates.push({ ...cell, score: clamp(cell.archScore, 0, 99), kind: "Höyük" });
+            }
+            if(cell.mineralScore > 32){
+                allCandidates.push({ ...cell, score: clamp(cell.mineralScore, 0, 99), kind: "Mineral" });
+            }
+            if(cell.settlementScore > 36){
+                allCandidates.push({ ...cell, score: clamp(cell.settlementScore, 0, 99), kind: "Yerleşim" });
+            }
+        });
+
+        const candidates = allCandidates
+            .sort((a, b) => b.score - a.score)
+            .filter((candidate, index, list) => {
+                return list.findIndex((other) => Math.abs(other.x - candidate.x) < 35 && Math.abs(other.y - candidate.y) < 35) === index;
+            })
+            .slice(0, 6);
+
+        candidates.forEach(drawDetectionBox);
+
+        const topKinds = candidates.length
+            ? candidates.map((item, index) => `${index + 1}) ${item.kind} ${item.score}/100`).join(", ")
+            : "Belirgin aday kutu bulunamadı";
+        const comment = candidates.length >= 4
+            ? "Birden fazla aday bölge bulundu; yüksek skorlu kutular öncelikli saha kontrolü için işaretlendi."
+            : candidates.length > 0
+                ? "Az sayıda aday bölge bulundu; farklı mevsim görüntüsü veya daha yüksek çözünürlükle doğrulama önerilir."
+                : "Görüntüde güçlü aday bölge çıkmadı; çözünürlük, gölge veya görüntü açısı analizi sınırlamış olabilir.";
+
+        document.getElementById("imageReport").textContent =
+            `Analiz tamamlandı. Kızıl/kahverengi yüzey %${redPct}, açık zemin %${brightPct}, bitki oranı %${vegPct}, koyu/su-gölge %${darkPct}, kenar yoğunluğu %${edgePct}. Adaylar: ${topKinds}. ${comment}`;
+        updateImageScoreCards(archScore, mineralScore, shapeScore, candidates.length);
+        URL.revokeObjectURL(img.src);
+    };
+    img.onerror = () => {
+        document.getElementById("imageReport").textContent = "Görüntü okunamadı. Lütfen JPG veya PNG biçiminde başka bir dosya deneyin.";
+        updateImageScoreCards("-", "-", "-", "-");
+    };
+    img.src = URL.createObjectURL(file);
+});
+
+updateAnalysis();
+</script>
+</body>
+</html>
