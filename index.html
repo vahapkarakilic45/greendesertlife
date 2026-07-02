@@ -416,6 +416,48 @@ section{
     margin:18px 0;
 }
 
+.option-panel{
+    display:none;
+    margin-top:18px;
+    padding-top:16px;
+    border-top:1px solid rgba(24,61,43,0.1);
+}
+
+.card.is-open .option-panel{
+    display:block;
+}
+
+.option-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    padding:10px 0;
+    border-bottom:1px solid rgba(24,61,43,0.08);
+    color:#4b5542;
+    font-size:14px;
+}
+
+.option-row:last-child{
+    border-bottom:0;
+}
+
+.add-cart{
+    border:0;
+    background:#2e7d32;
+    color:#fff;
+    padding:9px 13px;
+    border-radius:20px;
+    cursor:pointer;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.add-cart:hover,
+.add-cart:focus{
+    background:#256b29;
+}
+
 .buy{
     display:inline-block;
     background:#183d2b;
@@ -424,6 +466,9 @@ section{
     border-radius:24px;
     text-decoration:none;
     font-size:14px;
+    border:0;
+    cursor:pointer;
+    font-family:inherit;
 }
 
 .buy:hover,
@@ -546,6 +591,74 @@ section{
     margin-top:24px;
 }
 
+.cart-section{
+    background:rgba(255,255,255,0.32);
+}
+
+.cart-wrap{
+    max-width:1050px;
+    margin:0 auto;
+    background:rgba(255,255,255,0.66);
+    border:1px solid rgba(24,61,43,0.1);
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 15px 35px rgba(0,0,0,0.08);
+}
+
+.cart-empty{
+    margin:0;
+    padding:28px;
+    text-align:center;
+    color:#4b5542;
+}
+
+.cart-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.cart-table th,
+.cart-table td{
+    padding:15px 14px;
+    border-bottom:1px solid rgba(24,61,43,0.08);
+    text-align:left;
+    vertical-align:middle;
+}
+
+.cart-table th{
+    background:rgba(46,125,50,0.08);
+    color:#183d2b;
+    font-size:14px;
+}
+
+.cart-table td{
+    color:#4b5542;
+}
+
+.cart-remove{
+    border:0;
+    background:rgba(141,63,41,0.1);
+    color:#8d3f29;
+    padding:8px 12px;
+    border-radius:18px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.cart-remove:hover,
+.cart-remove:focus{
+    background:rgba(141,63,41,0.18);
+}
+
+.cart-total-line{
+    display:flex;
+    justify-content:flex-end;
+    gap:14px;
+    padding:18px 20px;
+    color:#183d2b;
+    font-weight:bold;
+}
+
 .whatsapp{
     position:fixed;
     right:22px;
@@ -648,6 +761,15 @@ footer{
         line-height:1.25;
     }
 
+    .option-row{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .add-cart{
+        width:100%;
+    }
+
     .story{
         padding:28px 22px;
         font-size:16px;
@@ -673,6 +795,14 @@ footer{
         bottom:16px;
         padding:13px 18px;
     }
+
+    .cart-wrap{
+        overflow-x:auto;
+    }
+
+    .cart-table{
+        min-width:720px;
+    }
 }
 
 @media(max-width:420px){
@@ -694,6 +824,7 @@ footer{
         <a href="#hikaye">Hakkımızda</a>
         <a href="#organik-tarim">Organik Tarım ve Sertifikamız</a>
         <a href="#galeri">Galeri</a>
+        <a href="#sepetim">Sepetim</a>
         <a href="#iletisim">İletişim</a>
     </div>
 </nav>
@@ -748,33 +879,36 @@ footer{
             </div>
 
             <div class="products">
-                <article class="card">
+                <article class="card product-card" data-product="Dağ Çayı">
                     <div class="card-body">
                         <div class="product-placeholder" aria-hidden="true"></div>
                         <h3>Dağ Çayı</h3>
                         <p>Yüksek rakımın ferah ve sade aromasını taşıyan bitki çayı.</p>
                         <div class="price">Yakında Satışta</div>
-                        <a class="buy" href="#iletisim" aria-label="Dağ çayı için iletişime geç">İncele</a>
+                        <button class="buy product-toggle" type="button" aria-expanded="false">İncele</button>
+                        <div class="option-panel" aria-label="Dağ Çayı ürün seçenekleri"></div>
                     </div>
                 </article>
 
-                <article class="card">
+                <article class="card product-card" data-product="Lavanta">
                     <img src="lavanta.jpg" alt="Lavanta" class="product-photo" loading="lazy">
                     <div class="card-body">
                         <h3>Lavanta</h3>
                         <p>Doğal kokusu ve sakinleştirici atmosferiyle lavanta ürünleri.</p>
                         <div class="price">Yakında Satışta</div>
-                        <a class="buy" href="#iletisim" aria-label="Lavanta için iletişime geç">İncele</a>
+                        <button class="buy product-toggle" type="button" aria-expanded="false">İncele</button>
+                        <div class="option-panel" aria-label="Lavanta ürün seçenekleri"></div>
                     </div>
                 </article>
 
-                <article class="card">
+                <article class="card product-card" data-product="Dağ Kekiği">
                     <img src="dag-kekigi.png" alt="Dağ kekiği" class="product-photo" loading="lazy">
                     <div class="card-body">
                         <h3>Dağ Kekiği</h3>
                         <p>Doğadan gelen güçlü aroma ve geleneksel lezzet.</p>
                         <div class="price">Yakında Satışta</div>
-                        <a class="buy" href="#iletisim" aria-label="Dağ kekiği için iletişime geç">İncele</a>
+                        <button class="buy product-toggle" type="button" aria-expanded="false">İncele</button>
+                        <div class="option-panel" aria-label="Dağ Kekiği ürün seçenekleri"></div>
                     </div>
                 </article>
             </div>
@@ -788,23 +922,25 @@ footer{
             </div>
 
             <div class="products">
-                <article class="card">
+                <article class="card product-card" data-product="Organik Kuru Kayısı">
                     <img src="kuru-kayisi.jpg" alt="Kuru kayısı" class="product-photo" loading="lazy">
                     <div class="card-body">
                         <h3>Organik Kuru Kayısı</h3>
                         <p>Organik üretim yaklaşımıyla hazırlanan, Malatya'nın bereketini taşıyan kuru kayısı.</p>
                         <div class="price">Yakında Satışta</div>
-                        <a class="buy" href="#iletisim" aria-label="Organik kuru kayısı için iletişime geç">İncele</a>
+                        <button class="buy product-toggle" type="button" aria-expanded="false">İncele</button>
+                        <div class="option-panel" aria-label="Organik Kuru Kayısı ürün seçenekleri"></div>
                     </div>
                 </article>
 
-                <article class="card">
+                <article class="card product-card" data-product="Organik Kuru Üzüm">
                     <img src="organik-kuru-uzum.jpeg" alt="Organik kuru üzüm" class="product-photo" loading="lazy">
                     <div class="card-body">
                         <h3>Organik Kuru Üzüm</h3>
                         <p>Doğaya saygılı yöntemlerle yetiştirilen üzümlerden hazırlanan doğal lezzet.</p>
                         <div class="price">Yakında Satışta</div>
-                        <a class="buy" href="#iletisim" aria-label="Organik kuru üzüm için iletişime geç">İncele</a>
+                        <button class="buy product-toggle" type="button" aria-expanded="false">İncele</button>
+                        <div class="option-panel" aria-label="Organik Kuru Üzüm ürün seçenekleri"></div>
                     </div>
                 </article>
             </div>
@@ -817,23 +953,25 @@ footer{
             </div>
 
             <div class="products">
-                <article class="card">
+                <article class="card product-card" data-product="Kuru Kayısı">
                     <img src="kuru-kayisi.jpg" alt="Kuru kayısı" class="product-photo" loading="lazy">
                     <div class="card-body">
                         <h3>Kuru Kayısı</h3>
                         <p>Malatya'nın güneşiyle olgunlaşan, özenle seçilmiş geleneksel kuru kayısı.</p>
                         <div class="price">Yakında Satışta</div>
-                        <a class="buy" href="#iletisim" aria-label="Kuru kayısı için iletişime geç">İncele</a>
+                        <button class="buy product-toggle" type="button" aria-expanded="false">İncele</button>
+                        <div class="option-panel" aria-label="Kuru Kayısı ürün seçenekleri"></div>
                     </div>
                 </article>
 
-                <article class="card">
+                <article class="card product-card" data-product="Kuru Üzüm">
                     <img src="kuru-uzum.jpeg" alt="Kuru üzüm" class="product-photo" loading="lazy">
                     <div class="card-body">
                         <h3>Kuru Üzüm</h3>
                         <p>Sofralara sade ve güvenilir bir lezzet taşıyan geleneksel kuru üzüm.</p>
                         <div class="price">Yakında Satışta</div>
-                        <a class="buy" href="#iletisim" aria-label="Kuru üzüm için iletişime geç">İncele</a>
+                        <button class="buy product-toggle" type="button" aria-expanded="false">İncele</button>
+                        <div class="option-panel" aria-label="Kuru Üzüm ürün seçenekleri"></div>
                     </div>
                 </article>
             </div>
@@ -892,6 +1030,30 @@ footer{
         <p class="gallery-footer">Doğadan gelen kalite, güvenle sofranıza.</p>
     </section>
 
+    <section id="sepetim" class="cart-section">
+        <h2 class="section-title">Sepetim</h2>
+        <div class="cart-wrap" aria-live="polite">
+            <p class="cart-empty">Sepetinizde ürün bulunmuyor.</p>
+            <table class="cart-table" hidden>
+                <thead>
+                    <tr>
+                        <th>Ürün adı</th>
+                        <th>Gramaj</th>
+                        <th>Fiyat</th>
+                        <th>Adet</th>
+                        <th>Toplam</th>
+                        <th>Sil</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-items"></tbody>
+            </table>
+            <div class="cart-total-line" hidden>
+                <span>Sepet Toplamı</span>
+                <span id="cart-total">0 TL</span>
+            </div>
+        </div>
+    </section>
+
     <section id="iletisim">
         <h2 class="section-title">İletişim</h2>
 
@@ -919,5 +1081,122 @@ footer{
         .buttons{opacity:1;transform:none}
     </style>
 </noscript>
+<script>
+(() => {
+    const options = [
+        { weight: "250 gr", price: 0 },
+        { weight: "500 gr", price: 0 },
+        { weight: "1000 gr", price: 0 }
+    ];
+    const storageKey = "greenDesertCart";
+    const formatPrice = value => `${value} TL`;
+    const cartTable = document.querySelector(".cart-table");
+    const cartBody = document.querySelector("#cart-items");
+    const cartEmpty = document.querySelector(".cart-empty");
+    const cartTotalLine = document.querySelector(".cart-total-line");
+    const cartTotal = document.querySelector("#cart-total");
+
+    function readCart() {
+        try {
+            return JSON.parse(localStorage.getItem(storageKey)) || [];
+        } catch (error) {
+            return [];
+        }
+    }
+
+    function writeCart(cart) {
+        localStorage.setItem(storageKey, JSON.stringify(cart));
+    }
+
+    function renderOptions() {
+        document.querySelectorAll(".product-card").forEach(card => {
+            const productName = card.dataset.product;
+            const panel = card.querySelector(".option-panel");
+            if (!productName || !panel) return;
+            panel.innerHTML = options.map(option => `
+                <div class="option-row">
+                    <span>${option.weight} — ${formatPrice(option.price)}</span>
+                    <button class="add-cart" type="button" data-product="${productName}" data-weight="${option.weight}" data-price="${option.price}">Sepete Ekle</button>
+                </div>
+            `).join("");
+        });
+    }
+
+    function renderCart() {
+        const cart = readCart();
+        if (!cartBody || !cartTable || !cartEmpty || !cartTotalLine || !cartTotal) return;
+
+        cartBody.innerHTML = "";
+        if (cart.length === 0) {
+            cartTable.hidden = true;
+            cartTotalLine.hidden = true;
+            cartEmpty.hidden = false;
+            cartTotal.textContent = formatPrice(0);
+            return;
+        }
+
+        cartEmpty.hidden = true;
+        cartTable.hidden = false;
+        cartTotalLine.hidden = false;
+
+        let total = 0;
+        cart.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            total += itemTotal;
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${item.product}</td>
+                <td>${item.weight}</td>
+                <td>${formatPrice(item.price)}</td>
+                <td>${item.quantity}</td>
+                <td>${formatPrice(itemTotal)}</td>
+                <td><button class="cart-remove" type="button" data-key="${item.key}">Sil</button></td>
+            `;
+            cartBody.appendChild(row);
+        });
+
+        cartTotal.textContent = formatPrice(total);
+    }
+
+    function addToCart(product, weight, price) {
+        const cart = readCart();
+        const key = `${product}-${weight}`;
+        const existing = cart.find(item => item.key === key);
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            cart.push({ key, product, weight, price, quantity: 1 });
+        }
+        writeCart(cart);
+        renderCart();
+    }
+
+    document.addEventListener("click", event => {
+        const toggle = event.target.closest(".product-toggle");
+        if (toggle) {
+            const card = toggle.closest(".product-card");
+            const isOpen = card.classList.toggle("is-open");
+            toggle.setAttribute("aria-expanded", String(isOpen));
+            return;
+        }
+
+        const addButton = event.target.closest(".add-cart");
+        if (addButton) {
+            addToCart(addButton.dataset.product, addButton.dataset.weight, Number(addButton.dataset.price || 0));
+            return;
+        }
+
+        const removeButton = event.target.closest(".cart-remove");
+        if (removeButton) {
+            const cart = readCart().filter(item => item.key !== removeButton.dataset.key);
+            writeCart(cart);
+            renderCart();
+        }
+    });
+
+    renderOptions();
+    renderCart();
+})();
+</script>
 </body>
 </html>
