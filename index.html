@@ -289,7 +289,7 @@ section{
 .group-card{
     display:flex;
     flex-direction:column;
-    min-height:390px;
+    min-height:500px;
     overflow:hidden;
     border:1px solid rgba(116,86,35,0.12);
     border-radius:14px;
@@ -303,7 +303,7 @@ section{
     flex:1;
     flex-direction:column;
     align-items:center;
-    padding:28px 28px 20px;
+    padding:28px 24px 22px;
 }
 
 .group-card h3{
@@ -316,30 +316,72 @@ section{
 
 .group-card p{
     max-width:330px;
-    min-height:58px;
-    margin:0 auto 20px;
+    min-height:54px;
+    margin:0 auto 22px;
     color:#2f3d2c;
     line-height:1.65;
 }
 
 .group-card__media{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    min-height:150px;
+    position:relative;
+    display:grid;
+    width:100%;
+    height:240px;
+    overflow:hidden;
     margin-top:auto;
+    border:1px solid rgba(116,86,35,0.12);
+    border-radius:12px;
+    background:rgba(255,248,232,0.72);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.62);
 }
 
 .group-card__media img{
-    width:min(310px,84%);
-    max-height:156px;
-    object-fit:contain;
-    filter:drop-shadow(0 18px 18px rgba(80,52,18,0.14));
+    width:100%;
+    height:100%;
+    min-width:0;
+    object-fit:cover;
+    display:block;
 }
 
 .group-card__media--natural{
-    gap:8px;
-    padding:0 22px;
+    grid-template-columns:1.12fr 0.88fr;
+    grid-template-rows:1fr 1fr;
+    gap:4px;
+    padding:4px;
+}
+
+.group-card__media--natural img:first-child{
+    grid-row:1 / span 2;
+}
+
+.group-card__media--duo{
+    grid-template-columns:1fr 1fr;
+    gap:4px;
+    padding:4px;
+}
+
+.group-card__media--duo img{
+    border-radius:8px;
+}
+
+.group-card__badge{
+    position:absolute;
+    right:14px;
+    top:14px;
+    width:72px;
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:3px solid #2e7d32;
+    border-radius:50%;
+    background:rgba(255,255,245,0.92);
+    color:#2e7d32;
+    font-size:10px;
+    font-weight:bold;
+    line-height:1.15;
+    text-align:center;
+    box-shadow:0 10px 20px rgba(24,61,43,0.16);
 }
 
 .herb-sprig{
@@ -355,7 +397,7 @@ section{
 
 .group-card .buy{
     min-width:172px;
-    margin-top:20px;
+    margin-top:22px;
     border-radius:9px;
     background:#245d25;
 }
@@ -1074,6 +1116,10 @@ footer{
         min-height:auto;
     }
 
+    .group-card__media{
+        height:230px;
+    }
+
     .group-card__body{
         padding:24px 20px;
     }
@@ -1190,6 +1236,10 @@ footer{
         width:100%;
     }
 
+    .group-card__media{
+        height:220px;
+    }
+
     .gallery-grid{
         grid-template-columns:1fr;
     }
@@ -1246,10 +1296,10 @@ footer{
                 <div class="group-card__body">
                     <h3 data-i18n="homeGroups.natural.title">Doğal Ürünler</h3>
                     <p data-i18n="homeGroups.natural.text">Doğanın sunduğu şifalı bitkiler ve aromatik ürünler.</p>
-                    <div class="group-card__media group-card__media--natural" aria-hidden="true">
-                        <span class="herb-sprig" style="--tilt:-24deg"></span>
-                        <span class="herb-sprig" style="--tilt:-7deg"></span>
-                        <span class="herb-sprig" style="--tilt:16deg"></span>
+                    <div class="group-card__media group-card__media--natural">
+                        <img src="dag-cayi.png" alt="Dağ çayı demeti" loading="lazy" data-i18n-attr="alt:homeGroups.natural.altTea">
+                        <img src="lavanta.jpg" alt="Lavanta demeti" loading="lazy" data-i18n-attr="alt:homeGroups.natural.altLavender">
+                        <img src="dag-kekigi.png" alt="Dağ kekiği demeti" loading="lazy" data-i18n-attr="alt:homeGroups.natural.altThyme">
                     </div>
                     <a class="buy" href="#dogal-urunler" data-i18n="homeGroups.button">Ürünleri İncele</a>
                 </div>
@@ -1259,8 +1309,10 @@ footer{
                 <div class="group-card__body">
                     <h3 data-i18n="homeGroups.organic.title">Organik Ürünler</h3>
                     <p data-i18n="homeGroups.organic.text">Sertifikalı organik ürünlerimizle sağlıklı ve güvenilir seçim.</p>
-                    <div class="group-card__media">
-                        <img src="kuru-kayisi.jpg" alt="Organik ürünler" loading="lazy" data-i18n-attr="alt:homeGroups.organic.alt">
+                    <div class="group-card__media group-card__media--duo">
+                        <img src="kuru-kayisi.jpg" alt="Organik kuru kayısı" loading="lazy" data-i18n-attr="alt:homeGroups.organic.altApricot">
+                        <img src="organik-kuru-uzum.jpeg" alt="Organik kuru üzüm" loading="lazy" data-i18n-attr="alt:homeGroups.organic.altRaisin">
+                        <span class="group-card__badge" data-i18n="homeGroups.organic.badge">Organik Sertifikalı</span>
                     </div>
                     <a class="buy" href="#organik-urunler" data-i18n="homeGroups.button">Ürünleri İncele</a>
                 </div>
@@ -1270,8 +1322,9 @@ footer{
                 <div class="group-card__body">
                     <h3 data-i18n="homeGroups.conventional.title">Konvansiyonel (Geleneksel) Ürünler</h3>
                     <p data-i18n="homeGroups.conventional.text">Geleneksel yöntemlerle üretilen, özenle seçilmiş kaliteli ürünler.</p>
-                    <div class="group-card__media">
-                        <img src="kuru-uzum.jpeg" alt="Konvansiyonel ürünler" loading="lazy" data-i18n-attr="alt:homeGroups.conventional.alt">
+                    <div class="group-card__media group-card__media--duo">
+                        <img src="kuru-kayisi.jpg" alt="Kuru kayısı" loading="lazy" data-i18n-attr="alt:homeGroups.conventional.altApricot">
+                        <img src="kuru-uzum.jpeg" alt="Kuru üzüm" loading="lazy" data-i18n-attr="alt:homeGroups.conventional.altRaisin">
                     </div>
                     <a class="buy" href="#konvansiyonel-urunler" data-i18n="homeGroups.button">Ürünleri İncele</a>
                 </div>
