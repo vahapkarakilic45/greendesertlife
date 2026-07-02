@@ -306,6 +306,73 @@ section{
     gap:25px;
 }
 
+.product-category{
+    margin-top:76px;
+}
+
+.product-category:first-of-type{
+    margin-top:0;
+}
+
+.category-header{
+    max-width:820px;
+    margin:0 auto 30px;
+    text-align:center;
+}
+
+.category-header h3{
+    margin:0 0 12px;
+    color:#183d2b;
+    font-size:28px;
+    font-weight:700;
+}
+
+.category-note{
+    color:#8b9187;
+    font-size:0.7em;
+    font-weight:500;
+}
+
+.category-header p{
+    max-width:680px;
+    margin:0 auto;
+    color:#4b5542;
+    line-height:1.8;
+}
+
+.cert-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:16px;
+    padding:8px 14px;
+    border-radius:999px;
+    background:rgba(46,125,50,0.1);
+    color:#2e7d32;
+    border:1px solid rgba(46,125,50,0.24);
+    font-size:13px;
+    font-weight:bold;
+}
+
+.cert-badge::before{
+    content:"";
+    width:10px;
+    height:10px;
+    border-radius:10px 0 10px 0;
+    background:#2e7d32;
+    transform:rotate(-18deg);
+}
+
+.product-placeholder{
+    width:52px;
+    height:52px;
+    margin:0 auto 18px;
+    border-radius:52px 8px 52px 8px;
+    background:linear-gradient(135deg,rgba(46,125,50,0.18),rgba(193,154,107,0.32));
+    border:1px solid rgba(46,125,50,0.18);
+    transform:rotate(-18deg);
+}
+
 .card{
     overflow:hidden;
     background:rgba(255,255,255,0.78);
@@ -560,6 +627,19 @@ footer{
         padding:58px 6%;
     }
 
+    .product-category{
+        margin-top:70px;
+    }
+
+    .category-header{
+        margin-bottom:24px;
+    }
+
+    .category-header h3{
+        font-size:24px;
+        line-height:1.25;
+    }
+
     .story{
         padding:28px 22px;
         font-size:16px;
@@ -648,47 +728,107 @@ footer{
     </section>
 
     <section id="urunler">
-        <h2 class="section-title">Doğal Ürünler</h2>
+        <h2 class="section-title">Ürünler</h2>
         <p class="section-intro">
-            Malatya'nın güneşi, dağların kokusu ve yerel üreticinin emeği; sade, temiz ve güvenilir ürünlerde buluşur.
+            Malatya'nın güneşi, dağların kokusu ve yerel üreticinin emeği; doğal, organik ve geleneksel ürünlerde buluşur.
         </p>
 
-        <div class="products">
-            <article class="card">
-                <div class="card-body">
-                    <h3>Kayısı</h3>
-                    <p>Malatya'nın güneşiyle olgunlaşan doğal kayısı ürünleri.</p>
-                    <div class="price">Yakında satışta</div>
-                    <a class="buy" href="#iletisim" aria-label="Kayısı için iletişime geç">İncele</a>
-                </div>
-            </article>
+        <div class="product-category">
+            <div class="category-header">
+                <h3>Doğal Ürünler</h3>
+                <p>Doğanın sunduğu saflığı ve yüksek rakımın eşsiz aromasını taşıyan doğal ürünlerimiz.</p>
+            </div>
 
-            <article class="card">
-                <div class="card-body">
-                    <h3>Dağ Çayı</h3>
-                    <p>Yüksek rakımın ferah ve sade aromasını taşıyan bitki çayı.</p>
-                    <div class="price">Yakında satışta</div>
-                    <a class="buy" href="#iletisim" aria-label="Dağ çayı için iletişime geç">İncele</a>
-                </div>
-            </article>
+            <div class="products">
+                <article class="card">
+                    <div class="card-body">
+                        <div class="product-placeholder" aria-hidden="true"></div>
+                        <h3>Dağ Çayı</h3>
+                        <p>Yüksek rakımın ferah ve sade aromasını taşıyan bitki çayı.</p>
+                        <div class="price">Yakında Satışta</div>
+                        <a class="buy" href="#iletisim" aria-label="Dağ çayı için iletişime geç">İncele</a>
+                    </div>
+                </article>
 
-            <article class="card">
-                <div class="card-body">
-                    <h3>Lavanta</h3>
-                    <p>Doğal kokusu ve sakinleştirici atmosferiyle lavanta ürünleri.</p>
-                    <div class="price">Yakında satışta</div>
-                    <a class="buy" href="#iletisim" aria-label="Lavanta için iletişime geç">İncele</a>
-                </div>
-            </article>
+                <article class="card">
+                    <div class="card-body">
+                        <div class="product-placeholder" aria-hidden="true"></div>
+                        <h3>Lavanta</h3>
+                        <p>Doğal kokusu ve sakinleştirici atmosferiyle lavanta ürünleri.</p>
+                        <div class="price">Yakında Satışta</div>
+                        <a class="buy" href="#iletisim" aria-label="Lavanta için iletişime geç">İncele</a>
+                    </div>
+                </article>
 
-            <article class="card">
-                <div class="card-body">
-                    <h3>Dağ Kekiği</h3>
-                    <p>Doğadan gelen güçlü aroma ve geleneksel lezzet.</p>
-                    <div class="price">Yakında satışta</div>
-                    <a class="buy" href="#iletisim" aria-label="Dağ kekiği için iletişime geç">İncele</a>
-                </div>
-            </article>
+                <article class="card">
+                    <div class="card-body">
+                        <div class="product-placeholder" aria-hidden="true"></div>
+                        <h3>Dağ Kekiği</h3>
+                        <p>Doğadan gelen güçlü aroma ve geleneksel lezzet.</p>
+                        <div class="price">Yakında Satışta</div>
+                        <a class="buy" href="#iletisim" aria-label="Dağ kekiği için iletişime geç">İncele</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div class="product-category">
+            <div class="category-header">
+                <h3>Organik Ürünler</h3>
+                <p>Organik Tarım Sertifikamız kapsamında, doğaya saygılı yöntemlerle üretilen sertifikalı ürünlerimiz.</p>
+                <span class="cert-badge">Organik Tarım Sertifikalı</span>
+            </div>
+
+            <div class="products">
+                <article class="card">
+                    <div class="card-body">
+                        <div class="product-placeholder" aria-hidden="true"></div>
+                        <h3>Organik Kuru Kayısı</h3>
+                        <p>Organik üretim yaklaşımıyla hazırlanan, Malatya'nın bereketini taşıyan kuru kayısı.</p>
+                        <div class="price">Yakında Satışta</div>
+                        <a class="buy" href="#iletisim" aria-label="Organik kuru kayısı için iletişime geç">İncele</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-body">
+                        <div class="product-placeholder" aria-hidden="true"></div>
+                        <h3>Organik Kuru Üzüm</h3>
+                        <p>Doğaya saygılı yöntemlerle yetiştirilen üzümlerden hazırlanan doğal lezzet.</p>
+                        <div class="price">Yakında Satışta</div>
+                        <a class="buy" href="#iletisim" aria-label="Organik kuru üzüm için iletişime geç">İncele</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div class="product-category">
+            <div class="category-header">
+                <h3>Konvansiyonel <span class="category-note">(Geleneksel)</span> Ürünler</h3>
+                <p>Kalite standartlarına uygun olarak üretilen ve özenle hazırlanan geleneksel ürünlerimiz.</p>
+            </div>
+
+            <div class="products">
+                <article class="card">
+                    <div class="card-body">
+                        <div class="product-placeholder" aria-hidden="true"></div>
+                        <h3>Kuru Kayısı</h3>
+                        <p>Malatya'nın güneşiyle olgunlaşan, özenle seçilmiş geleneksel kuru kayısı.</p>
+                        <div class="price">Yakında Satışta</div>
+                        <a class="buy" href="#iletisim" aria-label="Kuru kayısı için iletişime geç">İncele</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-body">
+                        <div class="product-placeholder" aria-hidden="true"></div>
+                        <h3>Kuru Üzüm</h3>
+                        <p>Sofralara sade ve güvenilir bir lezzet taşıyan geleneksel kuru üzüm.</p>
+                        <div class="price">Yakında Satışta</div>
+                        <a class="buy" href="#iletisim" aria-label="Kuru üzüm için iletişime geç">İncele</a>
+                    </div>
+                </article>
+            </div>
         </div>
     </section>
 
