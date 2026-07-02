@@ -302,7 +302,8 @@ section{
 
 .products{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(230px,336px));
+    justify-content:center;
     gap:25px;
 }
 
@@ -363,22 +364,32 @@ section{
     transform:rotate(-18deg);
 }
 
-.product-placeholder{
-    width:52px;
-    height:52px;
-    margin:0 auto 18px;
-    border-radius:52px 8px 52px 8px;
-    background:linear-gradient(135deg,rgba(46,125,50,0.18),rgba(193,154,107,0.32));
-    border:1px solid rgba(46,125,50,0.18);
-    transform:rotate(-18deg);
+.product-photo,
+.product-media-placeholder{
+    width:100%;
+    aspect-ratio:4/3;
+    display:block;
+    border-bottom:1px solid rgba(24,61,43,0.08);
 }
 
 .product-photo{
-    width:100%;
-    aspect-ratio:4/3;
     object-fit:cover;
-    display:block;
-    border-bottom:1px solid rgba(24,61,43,0.08);
+}
+
+.product-media-placeholder{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,rgba(46,125,50,0.12),rgba(193,154,107,0.22));
+}
+
+.product-placeholder{
+    width:52px;
+    height:52px;
+    border-radius:52px 8px 52px 8px;
+    background:linear-gradient(135deg,rgba(46,125,50,0.22),rgba(193,154,107,0.36));
+    border:1px solid rgba(46,125,50,0.18);
+    transform:rotate(-18deg);
 }
 
 .card{
@@ -388,6 +399,8 @@ section{
     border-radius:8px;
     box-shadow:0 15px 35px rgba(0,0,0,0.10);
     transition:0.3s;
+    display:flex;
+    flex-direction:column;
 }
 
 .card:hover{
@@ -397,6 +410,9 @@ section{
 .card-body{
     padding:24px;
     text-align:center;
+    display:flex;
+    flex:1;
+    flex-direction:column;
 }
 
 .card h3{
@@ -414,6 +430,7 @@ section{
 .price{
     font-weight:bold;
     margin:18px 0;
+    margin-top:auto;
 }
 
 .option-panel{
@@ -570,6 +587,30 @@ section{
     background:linear-gradient(135deg,#2e7d32,#9dbb73);
     transform:rotate(-18deg);
     opacity:0.82;
+}
+
+.gallery-photo{
+    aspect-ratio:4/3;
+    overflow:hidden;
+    border:1px solid #d8e4d1;
+    border-radius:16px;
+    background:#f8f6f1;
+    box-shadow:0 14px 28px rgba(24,61,43,0.1);
+    transition:transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.gallery-photo:hover,
+.gallery-photo:focus-within{
+    transform:scale(1.02);
+    border-color:#b7d2ab;
+    box-shadow:0 20px 38px rgba(46,125,50,0.18);
+}
+
+.gallery-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
 }
 
 .gallery-footer{
@@ -880,8 +921,10 @@ footer{
 
             <div class="products">
                 <article class="card product-card" data-product="Dağ Çayı">
+                    <div class="product-media-placeholder" aria-hidden="true">
+                        <div class="product-placeholder"></div>
+                    </div>
                     <div class="card-body">
-                        <div class="product-placeholder" aria-hidden="true"></div>
                         <h3>Dağ Çayı</h3>
                         <p>Yüksek rakımın ferah ve sade aromasını taşıyan bitki çayı.</p>
                         <div class="price">Yakında Satışta</div>
@@ -1014,17 +1057,34 @@ footer{
             </p>
         </div>
 
-        <div class="gallery-grid" aria-label="Yakında eklenecek üretim fotoğrafları">
-            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
-            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
-            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
-            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
-            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
-            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
-            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
-            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
-            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
-            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
+        <div class="gallery-grid" aria-label="Üretim sürecinden galeri fotoğrafları">
+            <figure class="gallery-photo">
+                <img src="galeri-01.png" alt="Dağ manzarası önünde üretim alanı" loading="lazy">
+            </figure>
+            <figure class="gallery-photo">
+                <img src="galeri-02.png" alt="Dağ ve vadi manzarası" loading="lazy">
+            </figure>
+            <figure class="gallery-photo">
+                <img src="galeri-03.png" alt="Gün batımında bahçe" loading="lazy">
+            </figure>
+            <figure class="gallery-photo">
+                <img src="galeri-04.png" alt="Bulutlu gökyüzü ve tarla" loading="lazy">
+            </figure>
+            <figure class="gallery-photo">
+                <img src="galeri-05.png" alt="Çiçek açmış ağaçlar ve dağ manzarası" loading="lazy">
+            </figure>
+            <figure class="gallery-photo">
+                <img src="galeri-06.png" alt="Lavanta bitkileri ve gün batımı" loading="lazy">
+            </figure>
+            <figure class="gallery-photo">
+                <img src="galeri-07.png" alt="Sonbahar renklerinde bahçe ağacı" loading="lazy">
+            </figure>
+            <figure class="gallery-photo">
+                <img src="galeri-08.png" alt="Kayısı kurutma alanı ve üretim süreci" loading="lazy">
+            </figure>
+            <figure class="gallery-photo">
+                <img src="galeri-09.png" alt="Yüksek rakımdan vadi manzarası" loading="lazy">
+            </figure>
         </div>
 
         <p class="gallery-footer">Doğadan gelen kalite, güvenle sofranıza.</p>
