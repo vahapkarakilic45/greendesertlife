@@ -57,9 +57,20 @@ nav{
 }
 
 nav .brand{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
     font-weight:bold;
-    letter-spacing:3px;
+    letter-spacing:2px;
     white-space:nowrap;
+    color:#183d2b;
+}
+
+.brand-logo{
+    width:auto;
+    height:56px;
+    display:block;
+    flex:0 0 auto;
 }
 
 .nav-actions{
@@ -966,6 +977,7 @@ body.lightbox-open{
 .cart-table{
     width:100%;
     border-collapse:collapse;
+    table-layout:fixed;
 }
 
 .cart-table th,
@@ -974,6 +986,7 @@ body.lightbox-open{
     border-bottom:1px solid rgba(24,61,43,0.08);
     text-align:left;
     vertical-align:middle;
+    overflow-wrap:break-word;
 }
 
 .cart-table th{
@@ -984,6 +997,19 @@ body.lightbox-open{
 
 .cart-table td{
     color:#4b5542;
+}
+
+.cart-table th:nth-child(2),
+.cart-table th:nth-child(3),
+.cart-table th:nth-child(4),
+.cart-table th:nth-child(5),
+.cart-table th:nth-child(6),
+.cart-table td:nth-child(2),
+.cart-table td:nth-child(3),
+.cart-table td:nth-child(4),
+.cart-table td:nth-child(5),
+.cart-table td:nth-child(6){
+    text-align:center;
 }
 
 .cart-remove{
@@ -1094,6 +1120,10 @@ footer{
 
     .logo{
         width:150px;
+    }
+
+    .brand-logo{
+        height:52px;
     }
 
     .features{
@@ -1251,7 +1281,10 @@ footer{
 <a class="skip-link" href="#icerik" data-i18n="skip.link">İçeriğe geç</a>
 
 <nav aria-label="Ana menü" data-i18n-attr="aria-label:nav.aria">
-    <div class="brand">GREENDESERT LIFE</div>
+    <div class="brand">
+        <img src="logo1.png" alt="Green Desert Life logosu" class="brand-logo" data-i18n-attr="alt:logo.alt">
+        <span>GREEN DESERT LIFE</span>
+    </div>
     <div class="nav-actions">
         <div class="nav-links">
             <a href="#anasayfa" data-i18n="nav.home">Ana Sayfa</a>
@@ -1558,7 +1591,7 @@ footer{
     <section id="sepetim" class="cart-section">
         <h2 class="section-title" data-i18n="cart.title">Sepetim</h2>
         <div class="cart-wrap" aria-live="polite">
-            <p class="cart-empty" data-i18n="cart.empty">Sepetinizde ürün bulunmuyor.</p>
+            <p class="cart-empty" data-i18n="cart.empty">Sepetiniz henüz boş.</p>
             <table class="cart-table" hidden>
                 <thead>
                     <tr>
@@ -1848,8 +1881,20 @@ footer{
     const bulkProductKeys = new Set(["organicApricot", "organicRaisin", "apricot", "raisin"]);
     const storageKey = "greenDesertCart";
     const i18n = () => window.greenDesertI18n;
-    const t = key => i18n()?.t(key) || key;
-    const translatedProductName = (key, fallback) => key ? t(`products.items.${key}.name`) : fallback;
+    const fallbacks = {
+        "cart.add": "Sepete Ekle",
+        "cart.currency": "TL",
+        "cart.remove": "Sil"
+    };
+    const t = key => {
+        const value = i18n()?.t(key);
+        return value && value !== key ? value : (fallbacks[key] || key);
+    };
+    const translatedProductName = (key, fallback) => {
+        if (!key) return fallback;
+        const value = i18n()?.t(`products.items.${key}.name`);
+        return value && value !== `products.items.${key}.name` ? value : fallback;
+    };
     const formatPrice = value => `${value} ${t("cart.currency")}`;
     const cartTable = document.querySelector(".cart-table");
     const cartBody = document.querySelector("#cart-items");

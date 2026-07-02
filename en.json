@@ -113,7 +113,7 @@
   "gallery.next": "Sonraki fotoğraf",
   "gallery.openPhoto": "{alt} büyük görüntüle",
   "cart.title": "Sepetim",
-  "cart.empty": "Sepetinizde ürün bulunmuyor.",
+  "cart.empty": "Sepetiniz henüz boş.",
   "cart.headers.product": "Ürün adı",
   "cart.headers.weight": "Gramaj",
   "cart.headers.price": "Fiyat",
