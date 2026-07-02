@@ -88,6 +88,7 @@ nav .brand{
 }
 
 nav a{
+    position:relative;
     color:#183d2b;
     text-decoration:none;
     font-size:14px;
@@ -96,6 +97,40 @@ nav a{
 nav a:hover,
 nav a:focus{
     color:#2e7d32;
+}
+
+.cart-nav-link.has-items{
+    padding:8px 13px;
+    border-radius:999px;
+    background:linear-gradient(135deg,#2e7d32,#183d2b);
+    color:#fff7e8;
+    box-shadow:0 10px 22px rgba(24,61,43,0.28);
+}
+
+.cart-nav-link.has-items:hover,
+.cart-nav-link.has-items:focus{
+    color:#fff7e8;
+    background:linear-gradient(135deg,#3f943f,#245d25);
+}
+
+.cart-nav-link.has-items::after{
+    content:attr(data-count);
+    position:absolute;
+    top:-8px;
+    right:-8px;
+    min-width:20px;
+    height:20px;
+    padding:0 6px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border:2px solid #fff7e8;
+    border-radius:999px;
+    background:#d08a24;
+    color:#fff;
+    font-size:11px;
+    font-weight:bold;
+    line-height:1;
 }
 
 .language-switcher{
@@ -1293,7 +1328,7 @@ footer{
             <a href="#galeri" data-i18n="nav.gallery">Galeri</a>
             <a href="#hikaye" data-i18n="nav.about">Hakkımızda</a>
             <a href="#iletisim" data-i18n="nav.contact">İletişim</a>
-            <a href="#sepetim" data-i18n="nav.cart">Sepetim</a>
+            <a href="#sepetim" class="cart-nav-link" data-i18n="nav.cart">Sepetim</a>
         </div>
         <div class="language-switcher" aria-label="Dil seçimi" data-i18n-attr="aria-label:language.aria">
             <button type="button" data-lang="tr" aria-pressed="true">TR</button>
@@ -1901,6 +1936,7 @@ footer{
     const cartEmpty = document.querySelector(".cart-empty");
     const cartTotalLine = document.querySelector(".cart-total-line");
     const cartTotal = document.querySelector("#cart-total");
+    const cartNavLink = document.querySelector(".cart-nav-link");
 
     function readCart() {
         try {
@@ -1912,6 +1948,19 @@ footer{
 
     function writeCart(cart) {
         localStorage.setItem(storageKey, JSON.stringify(cart));
+    }
+
+    function updateCartNav(cart) {
+        if (!cartNavLink) return;
+        const count = cart.reduce((sum, item) => sum + Number(item.quantity || 0), 0);
+        cartNavLink.classList.toggle("has-items", count > 0);
+        if (count > 0) {
+            cartNavLink.dataset.count = String(count);
+            cartNavLink.setAttribute("aria-label", `${t("nav.cart")} (${count})`);
+        } else {
+            delete cartNavLink.dataset.count;
+            cartNavLink.removeAttribute("aria-label");
+        }
     }
 
     function renderOptions() {
@@ -1932,6 +1981,7 @@ footer{
 
     function renderCart() {
         const cart = readCart();
+        updateCartNav(cart);
         if (!cartBody || !cartTable || !cartEmpty || !cartTotalLine || !cartTotal) return;
 
         cartBody.innerHTML = "";
