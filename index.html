@@ -1083,11 +1083,17 @@ footer{
 </noscript>
 <script>
 (() => {
-    const options = [
+    const defaultOptions = [
         { weight: "250 gr", price: 0 },
         { weight: "500 gr", price: 0 },
         { weight: "1000 gr", price: 0 }
     ];
+    const bulkOptions = [
+        ...defaultOptions,
+        { weight: "2000 gr", price: 0 },
+        { weight: "5000 gr", price: 0 }
+    ];
+    const bulkProductNames = new Set(["Organik Kuru Kayısı", "Organik Kuru Üzüm", "Kuru Kayısı", "Kuru Üzüm"]);
     const storageKey = "greenDesertCart";
     const formatPrice = value => `${value} TL`;
     const cartTable = document.querySelector(".cart-table");
@@ -1113,7 +1119,8 @@ footer{
             const productName = card.dataset.product;
             const panel = card.querySelector(".option-panel");
             if (!productName || !panel) return;
-            panel.innerHTML = options.map(option => `
+            const productOptions = bulkProductNames.has(productName) ? bulkOptions : defaultOptions;
+            panel.innerHTML = productOptions.map(option => `
                 <div class="option-row">
                     <span>${option.weight} — ${formatPrice(option.price)}</span>
                     <button class="add-cart" type="button" data-product="${productName}" data-weight="${option.weight}" data-price="${option.price}">Sepete Ekle</button>
