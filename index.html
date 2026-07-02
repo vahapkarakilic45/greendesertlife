@@ -61,6 +61,13 @@ nav .brand{
     white-space:nowrap;
 }
 
+.nav-actions{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:18px;
+}
+
 .nav-links{
     display:flex;
     flex-wrap:wrap;
@@ -77,6 +84,35 @@ nav a{
 nav a:hover,
 nav a:focus{
     color:#2e7d32;
+}
+
+.language-switcher{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    color:#183d2b;
+    font-size:13px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.language-switcher button{
+    border:0;
+    background:transparent;
+    color:#183d2b;
+    cursor:pointer;
+    font:inherit;
+    padding:4px 2px;
+}
+
+.language-switcher button:hover,
+.language-switcher button:focus,
+.language-switcher button.is-active{
+    color:#2e7d32;
+}
+
+.language-switcher span{
+    color:rgba(24,61,43,0.42);
 }
 
 header{
@@ -840,6 +876,14 @@ footer{
     nav{
         align-items:flex-start;
         gap:12px;
+        flex-direction:column;
+    }
+
+    .nav-actions{
+        align-items:flex-start;
+        flex-direction:column;
+        gap:12px;
+        width:100%;
     }
 
     .nav-links{
@@ -987,91 +1031,98 @@ footer{
 </head>
 
 <body>
-<a class="skip-link" href="#icerik">İçeriğe geç</a>
+<a class="skip-link" href="#icerik" data-i18n="skip.link">İçeriğe geç</a>
 
-<nav aria-label="Ana menü">
+<nav aria-label="Ana menü" data-i18n-attr="aria-label:nav.aria">
     <div class="brand">GREENDESERT LIFE</div>
-    <div class="nav-links">
-        <a href="#anasayfa">Ana Sayfa</a>
-        <a href="#urunler">Ürünler</a>
-        <a href="#hikaye">Hakkımızda</a>
-        <a href="#organik-tarim">Organik Tarım ve Sertifikamız</a>
-        <a href="#galeri">Galeri</a>
-        <a href="#sepetim">Sepetim</a>
-        <a href="#iletisim">İletişim</a>
+    <div class="nav-actions">
+        <div class="nav-links">
+            <a href="#anasayfa" data-i18n="nav.home">Ana Sayfa</a>
+            <a href="#urunler" data-i18n="nav.products">Ürünler</a>
+            <a href="#hikaye" data-i18n="nav.about">Hakkımızda</a>
+            <a href="#organik-tarim" data-i18n="nav.organic">Organik Tarım ve Sertifikamız</a>
+            <a href="#galeri" data-i18n="nav.gallery">Galeri</a>
+            <a href="#sepetim" data-i18n="nav.cart">Sepetim</a>
+            <a href="#iletisim" data-i18n="nav.contact">İletişim</a>
+        </div>
+        <div class="language-switcher" aria-label="Dil seçimi" data-i18n-attr="aria-label:language.aria">
+            <button type="button" data-lang="tr" aria-pressed="true">TR</button>
+            <span aria-hidden="true">|</span>
+            <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
     </div>
 </nav>
 
 <header id="anasayfa">
     <div class="hero-scene">
         <div class="logo-wrap">
-            <img src="logo1.png" alt="Green Desert Life logosu" class="logo">
+            <img src="logo1.png" alt="Green Desert Life logosu" class="logo" data-i18n-attr="alt:logo.alt">
         </div>
         <h1>GREEN DESERT LIFE</h1>
 
-        <p class="hero-text">
+        <p class="hero-text" data-i18n="hero.text">
             Doğanın bereketi, insanın emeği, hayatın özü.
         </p>
 
         <div class="buttons">
-            <a href="#urunler" class="btn primary"><span class="leaf-mark" aria-hidden="true"></span>Ürünleri Keşfet</a>
+            <a href="#urunler" class="btn primary"><span class="leaf-mark" aria-hidden="true"></span><span data-i18n="hero.cta">Ürünleri Keşfet</span></a>
         </div>
     </div>
 </header>
 
 <main id="icerik">
-    <section class="features" aria-label="Green Desert Life özellikleri">
+    <section class="features" aria-label="Green Desert Life özellikleri" data-i18n-attr="aria-label:features.aria">
         <div class="feature-card">
             <span class="feature-icon feature-leaf" aria-hidden="true"></span>
-            Doğal & Katkısız
+            <span data-i18n="features.natural">Doğal & Katkısız</span>
         </div>
         <div class="feature-card">
             <span class="feature-icon feature-mountain" aria-hidden="true"></span>
-            Yüksek Rakım
+            <span data-i18n="features.altitude">Yüksek Rakım</span>
         </div>
         <div class="feature-card">
             <span class="feature-icon feature-cycle" aria-hidden="true"></span>
-            Sürdürülebilir
+            <span data-i18n="features.sustainable">Sürdürülebilir</span>
         </div>
         <div class="feature-card">
             <span class="feature-icon feature-seal" aria-hidden="true"></span>
-            Güvenilir & Şeffaf
+            <span data-i18n="features.trust">Güvenilir & Şeffaf</span>
         </div>
     </section>
 
     <section id="urunler">
-        <h2 class="section-title">Ürünler</h2>
-        <p class="section-intro">
+        <h2 class="section-title" data-i18n="products.title">Ürünler</h2>
+        <p class="section-intro" data-i18n="products.intro">
             Malatya'nın güneşi, dağların kokusu ve yerel üreticinin emeği; doğal, organik ve geleneksel ürünlerde buluşur.
         </p>
 
         <div class="product-category">
             <div class="category-header">
-                <h3>Organik Ürünler</h3>
-                <p>Organik Tarım Sertifikamız kapsamında, doğaya saygılı yöntemlerle üretilen sertifikalı ürünlerimiz.</p>
-                <span class="cert-badge">Organik Tarım Sertifikalı</span>
+                <h3 data-i18n="products.categories.organic.title">Organik Ürünler</h3>
+                <p data-i18n="products.categories.organic.description">Organik Tarım Sertifikamız kapsamında, doğaya saygılı yöntemlerle üretilen sertifikalı ürünlerimiz.</p>
+                <span class="cert-badge" data-i18n="products.categories.organic.badge">Organik Tarım Sertifikalı</span>
             </div>
 
             <div class="products">
-                <article class="card product-card" data-product="Organik Kuru Kayısı">
-                    <img src="kuru-kayisi.jpg" alt="Kuru kayısı" class="product-photo" loading="lazy">
+                <article class="card product-card" data-product="Organik Kuru Kayısı" data-product-key="organicApricot">
+                    <img src="kuru-kayisi.jpg" alt="Kuru kayısı" class="product-photo" loading="lazy" data-i18n-attr="alt:products.items.organicApricot.alt">
                     <div class="card-body">
-                        <h3>Organik Kuru Kayısı</h3>
-                        <p>Organik üretim yaklaşımıyla hazırlanan, Malatya'nın bereketini taşıyan kuru kayısı.</p>
-                        <div class="price">Yakında Satışta</div>
-                        <button class="buy product-toggle" type="button" aria-expanded="false">İncele</button>
-                        <div class="option-panel" aria-label="Organik Kuru Kayısı ürün seçenekleri"></div>
+                        <h3 data-i18n="products.items.organicApricot.name">Organik Kuru Kayısı</h3>
+                        <p data-i18n="products.items.organicApricot.description">Organik üretim yaklaşımıyla hazırlanan, Malatya'nın bereketini taşıyan kuru kayısı.</p>
+                        <div class="price" data-i18n="products.comingSoon">Yakında Satışta</div>
+                        <button class="buy product-toggle" type="button" aria-expanded="false" data-i18n="products.inspect">İncele</button>
+                        <div class="option-panel" aria-label="Organik Kuru Kayısı ürün seçenekleri" data-i18n-attr="aria-label:products.items.organicApricot.options"></div>
                     </div>
                 </article>
 
-                <article class="card product-card" data-product="Organik Kuru Üzüm">
-                    <img src="organik-kuru-uzum.jpeg" alt="Organik kuru üzüm" class="product-photo" loading="lazy">
+                <article class="card product-card" data-product="Organik Kuru Üzüm" data-product-key="organicRaisin">
+                    <img src="organik-kuru-uzum.jpeg" alt="Organik kuru üzüm" class="product-photo" loading="lazy" data-i18n-attr="alt:products.items.organicRaisin.alt">
                     <div class="card-body">
-                        <h3>Organik Kuru Üzüm</h3>
-                        <p>Doğaya saygılı yöntemlerle yetiştirilen üzümlerden hazırlanan doğal lezzet.</p>
-                        <div class="price">Yakında Satışta</div>
-                        <button class="buy product-toggle" type="button" aria-expanded="false">İncele</button>
-                        <div class="option-panel" aria-label="Organik Kuru Üzüm ürün seçenekleri"></div>
+                        <h3 data-i18n="products.items.organicRaisin.name">Organik Kuru Üzüm</h3>
+                        <p data-i18n="products.items.organicRaisin.description">Doğaya saygılı yöntemlerle yetiştirilen üzümlerden hazırlanan doğal lezzet.</p>
+                        <div class="price" data-i18n="products.comingSoon">Yakında Satışta</div>
+                        <button class="buy product-toggle" type="button" aria-expanded="false" data-i18n="products.inspect">İncele</button>
+                        <div class="option-panel" aria-label="Organik Kuru Üzüm ürün seçenekleri" data-i18n-attr="aria-label:products.items.organicRaisin.options"></div>
                     </div>
                 </article>
             </div>
@@ -1079,30 +1130,30 @@ footer{
 
         <div class="product-category">
             <div class="category-header">
-                <h3>Konvansiyonel <span class="category-note">(Geleneksel)</span> Ürünler</h3>
-                <p>Kalite standartlarına uygun olarak üretilen ve özenle hazırlanan geleneksel ürünlerimiz.</p>
+                <h3 data-i18n="products.categories.conventional.title">Konvansiyonel <span class="category-note">(Geleneksel)</span> Ürünler</h3>
+                <p data-i18n="products.categories.conventional.description">Kalite standartlarına uygun olarak üretilen ve özenle hazırlanan geleneksel ürünlerimiz.</p>
             </div>
 
             <div class="products">
-                <article class="card product-card" data-product="Kuru Kayısı">
-                    <img src="kuru-kayisi.jpg" alt="Kuru kayısı" class="product-photo" loading="lazy">
+                <article class="card product-card" data-product="Kuru Kayısı" data-product-key="apricot">
+                    <img src="kuru-kayisi.jpg" alt="Kuru kayısı" class="product-photo" loading="lazy" data-i18n-attr="alt:products.items.apricot.alt">
                     <div class="card-body">
-                        <h3>Kuru Kayısı</h3>
-                        <p>Malatya'nın güneşiyle olgunlaşan, özenle seçilmiş geleneksel kuru kayısı.</p>
-                        <div class="price">Yakında Satışta</div>
-                        <button class="buy product-toggle" type="button" aria-expanded="false">İncele</button>
-                        <div class="option-panel" aria-label="Kuru Kayısı ürün seçenekleri"></div>
+                        <h3 data-i18n="products.items.apricot.name">Kuru Kayısı</h3>
+                        <p data-i18n="products.items.apricot.description">Malatya'nın güneşiyle olgunlaşan, özenle seçilmiş geleneksel kuru kayısı.</p>
+                        <div class="price" data-i18n="products.comingSoon">Yakında Satışta</div>
+                        <button class="buy product-toggle" type="button" aria-expanded="false" data-i18n="products.inspect">İncele</button>
+                        <div class="option-panel" aria-label="Kuru Kayısı ürün seçenekleri" data-i18n-attr="aria-label:products.items.apricot.options"></div>
                     </div>
                 </article>
 
-                <article class="card product-card" data-product="Kuru Üzüm">
-                    <img src="kuru-uzum.jpeg" alt="Kuru üzüm" class="product-photo" loading="lazy">
+                <article class="card product-card" data-product="Kuru Üzüm" data-product-key="raisin">
+                    <img src="kuru-uzum.jpeg" alt="Kuru üzüm" class="product-photo" loading="lazy" data-i18n-attr="alt:products.items.raisin.alt">
                     <div class="card-body">
-                        <h3>Kuru Üzüm</h3>
-                        <p>Sofralara sade ve güvenilir bir lezzet taşıyan geleneksel kuru üzüm.</p>
-                        <div class="price">Yakında Satışta</div>
-                        <button class="buy product-toggle" type="button" aria-expanded="false">İncele</button>
-                        <div class="option-panel" aria-label="Kuru Üzüm ürün seçenekleri"></div>
+                        <h3 data-i18n="products.items.raisin.name">Kuru Üzüm</h3>
+                        <p data-i18n="products.items.raisin.description">Sofralara sade ve güvenilir bir lezzet taşıyan geleneksel kuru üzüm.</p>
+                        <div class="price" data-i18n="products.comingSoon">Yakında Satışta</div>
+                        <button class="buy product-toggle" type="button" aria-expanded="false" data-i18n="products.inspect">İncele</button>
+                        <div class="option-panel" aria-label="Kuru Üzüm ürün seçenekleri" data-i18n-attr="aria-label:products.items.raisin.options"></div>
                     </div>
                 </article>
             </div>
@@ -1110,43 +1161,43 @@ footer{
 
         <div class="product-category">
             <div class="category-header">
-                <h3>Doğal Ürünler</h3>
-                <p>Doğanın sunduğu saflığı ve yüksek rakımın eşsiz aromasını taşıyan doğal ürünlerimiz.</p>
+                <h3 data-i18n="products.categories.natural.title">Doğal Ürünler</h3>
+                <p data-i18n="products.categories.natural.description">Doğanın sunduğu saflığı ve yüksek rakımın eşsiz aromasını taşıyan doğal ürünlerimiz.</p>
             </div>
 
             <div class="products">
-                <article class="card product-card" data-product="Dağ Çayı">
+                <article class="card product-card" data-product="Dağ Çayı" data-product-key="mountainTea">
                     <div class="product-media-placeholder" aria-hidden="true">
                         <div class="product-placeholder"></div>
                     </div>
                     <div class="card-body">
-                        <h3>Dağ Çayı</h3>
-                        <p>Yüksek rakımın ferah ve sade aromasını taşıyan bitki çayı.</p>
-                        <div class="price">Yakında Satışta</div>
-                        <button class="buy product-toggle" type="button" aria-expanded="false">İncele</button>
-                        <div class="option-panel" aria-label="Dağ Çayı ürün seçenekleri"></div>
+                        <h3 data-i18n="products.items.mountainTea.name">Dağ Çayı</h3>
+                        <p data-i18n="products.items.mountainTea.description">Yüksek rakımın ferah ve sade aromasını taşıyan bitki çayı.</p>
+                        <div class="price" data-i18n="products.comingSoon">Yakında Satışta</div>
+                        <button class="buy product-toggle" type="button" aria-expanded="false" data-i18n="products.inspect">İncele</button>
+                        <div class="option-panel" aria-label="Dağ Çayı ürün seçenekleri" data-i18n-attr="aria-label:products.items.mountainTea.options"></div>
                     </div>
                 </article>
 
-                <article class="card product-card" data-product="Lavanta">
-                    <img src="lavanta.jpg" alt="Lavanta" class="product-photo" loading="lazy">
+                <article class="card product-card" data-product="Lavanta" data-product-key="lavender">
+                    <img src="lavanta.jpg" alt="Lavanta" class="product-photo" loading="lazy" data-i18n-attr="alt:products.items.lavender.alt">
                     <div class="card-body">
-                        <h3>Lavanta</h3>
-                        <p>Doğal kokusu ve sakinleştirici atmosferiyle lavanta ürünleri.</p>
-                        <div class="price">Yakında Satışta</div>
-                        <button class="buy product-toggle" type="button" aria-expanded="false">İncele</button>
-                        <div class="option-panel" aria-label="Lavanta ürün seçenekleri"></div>
+                        <h3 data-i18n="products.items.lavender.name">Lavanta</h3>
+                        <p data-i18n="products.items.lavender.description">Doğal kokusu ve sakinleştirici atmosferiyle lavanta ürünleri.</p>
+                        <div class="price" data-i18n="products.comingSoon">Yakında Satışta</div>
+                        <button class="buy product-toggle" type="button" aria-expanded="false" data-i18n="products.inspect">İncele</button>
+                        <div class="option-panel" aria-label="Lavanta ürün seçenekleri" data-i18n-attr="aria-label:products.items.lavender.options"></div>
                     </div>
                 </article>
 
-                <article class="card product-card" data-product="Dağ Kekiği">
-                    <img src="dag-kekigi.png" alt="Dağ kekiği" class="product-photo" loading="lazy">
+                <article class="card product-card" data-product="Dağ Kekiği" data-product-key="thyme">
+                    <img src="dag-kekigi.png" alt="Dağ kekiği" class="product-photo" loading="lazy" data-i18n-attr="alt:products.items.thyme.alt">
                     <div class="card-body">
-                        <h3>Dağ Kekiği</h3>
-                        <p>Doğadan gelen güçlü aroma ve geleneksel lezzet.</p>
-                        <div class="price">Yakında Satışta</div>
-                        <button class="buy product-toggle" type="button" aria-expanded="false">İncele</button>
-                        <div class="option-panel" aria-label="Dağ Kekiği ürün seçenekleri"></div>
+                        <h3 data-i18n="products.items.thyme.name">Dağ Kekiği</h3>
+                        <p data-i18n="products.items.thyme.description">Doğadan gelen güçlü aroma ve geleneksel lezzet.</p>
+                        <div class="price" data-i18n="products.comingSoon">Yakında Satışta</div>
+                        <button class="buy product-toggle" type="button" aria-expanded="false" data-i18n="products.inspect">İncele</button>
+                        <div class="option-panel" aria-label="Dağ Kekiği ürün seçenekleri" data-i18n-attr="aria-label:products.items.thyme.options"></div>
                     </div>
                 </article>
             </div>
@@ -1154,28 +1205,28 @@ footer{
     </section>
 
     <section id="hikaye">
-        <h2 class="section-title">Marka Hikayesi</h2>
+        <h2 class="section-title" data-i18n="story.title">Marka Hikayesi</h2>
 
         <div class="story">
-            <p>
+            <p data-i18n="story.paragraph1">
                 Green Desert Life, çölün zorlu tabiatında yeşeren tohumun hikayesidir. Yaşamın karşıtlıklar içinden yeniden filizlenmesini; kuraklıkla bereketin, emekle umudun aynı bütünün parçaları olduğunu anlatır.
             </p>
-            <p>
+            <p data-i18n="story.paragraph2">
                 Logodaki "G", insanı, bitkiyi, toprağı ve suyu aynı yaşam ağının parçası olarak gören Gaia düşüncesine bir göndermedir. Bizler o büyük organizmanın küçük bir parçasıyız.
             </p>
-            <p>
+            <p data-i18n="story.paragraph3">
                 Malatya'nın kayısısını, dağların çayını, lavantasını ve kekiğini en doğal haliyle dostlarımıza ulaştırmak için yola çıktık. Amacımız yalnızca ürün sunmak değil; doğayla bağ kuran, üreticiyle tüketici arasında güven oluşturan bir yaşam deneyimi paylaşmaktır.
             </p>
-            <p class="quote">"Adil dükkanda pazarlık olmaz."</p>
+            <p class="quote" data-i18n="story.quote">"Adil dükkanda pazarlık olmaz."</p>
         </div>
     </section>
 
     <section id="organik-tarim">
-        <h2 class="section-title">Organik Tarım ve Sertifikamız</h2>
+        <h2 class="section-title" data-i18n="organic.title">Organik Tarım ve Sertifikamız</h2>
 
         <div class="story organic-info-card">
-            <h3>Organik Tarım Nedir?</h3>
-            <p>
+            <h3 data-i18n="organic.infoTitle">Organik Tarım Nedir?</h3>
+            <p data-i18n="organic.infoText">
                 Organik tarım; doğaya, toprağa ve insan sağlığına saygılı üretim anlayışıdır. Bu üretim sisteminde sentetik kimyasal gübreler, zararlı pestisitler ve genetiği değiştirilmiş organizmalar (GDO) kullanılmaz. Üretimin her aşaması yetkili kontrol ve sertifikasyon kuruluşları tarafından denetlenir ve belgelendirilir. Böylece sofranıza ulaşan ürünler, doğallığı ve güvenilirliği garanti altına alınmış şekilde sunulur.
             </p>
         </div>
@@ -1183,94 +1234,94 @@ footer{
 
     <section id="galeri" class="gallery-section" aria-labelledby="galeri-baslik">
         <div class="gallery-heading">
-            <p class="section-kicker">Galeri</p>
-            <h2 id="galeri-baslik" class="section-title">Üretim Sürecinden Kareler</h2>
-            <p class="gallery-description">
+            <p class="section-kicker" data-i18n="gallery.kicker">Galeri</p>
+            <h2 id="galeri-baslik" class="section-title" data-i18n="gallery.title">Üretim Sürecinden Kareler</h2>
+            <p class="gallery-description" data-i18n="gallery.description">
                 Topraktan sofranıza uzanan yolculuğumuzun her adımını doğaya saygı ve özenle gerçekleştiriyoruz.
             </p>
         </div>
 
-        <div class="gallery-grid" aria-label="Üretim sürecinden galeri fotoğrafları">
+        <div class="gallery-grid" aria-label="Üretim sürecinden galeri fotoğrafları" data-i18n-attr="aria-label:gallery.gridAria">
             <figure class="gallery-photo">
-                <img src="galeri-01.png" alt="Dağ manzarası önünde üretim alanı" loading="lazy">
+                <img src="galeri-01.png" alt="Dağ manzarası önünde üretim alanı" loading="lazy" data-i18n-attr="alt:gallery.photos.1">
             </figure>
             <figure class="gallery-photo">
-                <img src="galeri-02.png" alt="Dağ ve vadi manzarası" loading="lazy">
+                <img src="galeri-02.png" alt="Dağ ve vadi manzarası" loading="lazy" data-i18n-attr="alt:gallery.photos.2">
             </figure>
             <figure class="gallery-photo">
-                <img src="galeri-03.png" alt="Gün batımında bahçe" loading="lazy">
+                <img src="galeri-03.png" alt="Gün batımında bahçe" loading="lazy" data-i18n-attr="alt:gallery.photos.3">
             </figure>
             <figure class="gallery-photo">
-                <img src="galeri-04.png" alt="Bulutlu gökyüzü ve tarla" loading="lazy">
+                <img src="galeri-04.png" alt="Bulutlu gökyüzü ve tarla" loading="lazy" data-i18n-attr="alt:gallery.photos.4">
             </figure>
             <figure class="gallery-photo">
-                <img src="galeri-05.png" alt="Çiçek açmış ağaçlar ve dağ manzarası" loading="lazy">
+                <img src="galeri-05.png" alt="Çiçek açmış ağaçlar ve dağ manzarası" loading="lazy" data-i18n-attr="alt:gallery.photos.5">
             </figure>
             <figure class="gallery-photo">
-                <img src="galeri-06.png" alt="Lavanta bitkileri ve gün batımı" loading="lazy">
+                <img src="galeri-06.png" alt="Lavanta bitkileri ve gün batımı" loading="lazy" data-i18n-attr="alt:gallery.photos.6">
             </figure>
             <figure class="gallery-photo">
-                <img src="galeri-07.png" alt="Sonbahar renklerinde bahçe ağacı" loading="lazy">
+                <img src="galeri-07.png" alt="Sonbahar renklerinde bahçe ağacı" loading="lazy" data-i18n-attr="alt:gallery.photos.7">
             </figure>
             <figure class="gallery-photo">
-                <img src="galeri-08.png" alt="Kayısı kurutma alanı ve üretim süreci" loading="lazy">
+                <img src="galeri-08.png" alt="Kayısı kurutma alanı ve üretim süreci" loading="lazy" data-i18n-attr="alt:gallery.photos.8">
             </figure>
             <figure class="gallery-photo">
-                <img src="galeri-09.png" alt="Yüksek rakımdan vadi manzarası" loading="lazy">
+                <img src="galeri-09.png" alt="Yüksek rakımdan vadi manzarası" loading="lazy" data-i18n-attr="alt:gallery.photos.9">
             </figure>
         </div>
 
-        <p class="gallery-footer">Doğadan gelen kalite, güvenle sofranıza.</p>
+        <p class="gallery-footer" data-i18n="gallery.footer">Doğadan gelen kalite, güvenle sofranıza.</p>
     </section>
 
-    <div class="gallery-lightbox" aria-hidden="true" role="dialog" aria-label="Galeri fotograf goruntuleyici">
-        <button class="gallery-lightbox__button gallery-lightbox__button--close" type="button" aria-label="Kapat">&times;</button>
-        <button class="gallery-lightbox__button gallery-lightbox__button--prev" type="button" aria-label="Onceki fotograf">&#8249;</button>
+    <div class="gallery-lightbox" aria-hidden="true" role="dialog" aria-label="Galeri fotograf goruntuleyici" data-i18n-attr="aria-label:gallery.lightboxAria">
+        <button class="gallery-lightbox__button gallery-lightbox__button--close" type="button" aria-label="Kapat" data-i18n-attr="aria-label:gallery.close">&times;</button>
+        <button class="gallery-lightbox__button gallery-lightbox__button--prev" type="button" aria-label="Onceki fotograf" data-i18n-attr="aria-label:gallery.prev">&#8249;</button>
         <img class="gallery-lightbox__image" src="" alt="">
-        <button class="gallery-lightbox__button gallery-lightbox__button--next" type="button" aria-label="Sonraki fotograf">&#8250;</button>
+        <button class="gallery-lightbox__button gallery-lightbox__button--next" type="button" aria-label="Sonraki fotograf" data-i18n-attr="aria-label:gallery.next">&#8250;</button>
     </div>
 
     <section id="sepetim" class="cart-section">
-        <h2 class="section-title">Sepetim</h2>
+        <h2 class="section-title" data-i18n="cart.title">Sepetim</h2>
         <div class="cart-wrap" aria-live="polite">
-            <p class="cart-empty">Sepetinizde ürün bulunmuyor.</p>
+            <p class="cart-empty" data-i18n="cart.empty">Sepetinizde ürün bulunmuyor.</p>
             <table class="cart-table" hidden>
                 <thead>
                     <tr>
-                        <th>Ürün adı</th>
-                        <th>Gramaj</th>
-                        <th>Fiyat</th>
-                        <th>Adet</th>
-                        <th>Toplam</th>
-                        <th>Sil</th>
+                        <th data-i18n="cart.headers.product">Ürün adı</th>
+                        <th data-i18n="cart.headers.weight">Gramaj</th>
+                        <th data-i18n="cart.headers.price">Fiyat</th>
+                        <th data-i18n="cart.headers.quantity">Adet</th>
+                        <th data-i18n="cart.headers.total">Toplam</th>
+                        <th data-i18n="cart.headers.remove">Sil</th>
                     </tr>
                 </thead>
                 <tbody id="cart-items"></tbody>
             </table>
             <div class="cart-total-line" hidden>
-                <span>Sepet Toplamı</span>
+                <span data-i18n="cart.totalLabel">Sepet Toplamı</span>
                 <span id="cart-total">0 TL</span>
             </div>
         </div>
     </section>
 
     <section id="iletisim">
-        <h2 class="section-title">İletişim</h2>
+        <h2 class="section-title" data-i18n="contact.title">İletişim</h2>
 
         <div class="story">
-            <p>
+            <p data-i18n="contact.text">
                 Sipariş, ürün bilgisi ve iş birliği için bizimle WhatsApp üzerinden iletişime geçebilirsiniz.
             </p>
             <div class="contact-actions">
-                <a class="buy" href="https://wa.me/905056591153" target="_blank" rel="noopener">WhatsApp'tan Yaz</a>
+                <a class="buy" href="https://wa.me/905056591153" target="_blank" rel="noopener" data-i18n="contact.whatsapp">WhatsApp'tan Yaz</a>
             </div>
         </div>
     </section>
 </main>
 
-<a class="whatsapp" href="https://wa.me/905056591153" target="_blank" rel="noopener" aria-label="Green Desert Life WhatsApp hattı">WhatsApp</a>
+<a class="whatsapp" href="https://wa.me/905056591153" target="_blank" rel="noopener" aria-label="Green Desert Life WhatsApp hattı" data-i18n="whatsapp.text" data-i18n-attr="aria-label:whatsapp.aria">WhatsApp</a>
 
-<footer>
+<footer data-i18n="footer.text">
     © 2026 Green Desert Life - Doğanın Sırrı. Yaşamın Uyanışı.
 </footer>
 <noscript>
@@ -1282,6 +1333,116 @@ footer{
     </style>
 </noscript>
 <script>
+(() => {
+    const defaultLanguage = "tr";
+    const supportedLanguages = ["tr", "en"];
+    const storageKey = "greenDesertLanguage";
+    const dictionaries = {};
+    const listeners = new Set();
+    let currentLanguage = supportedLanguages.includes(localStorage.getItem(storageKey))
+        ? localStorage.getItem(storageKey)
+        : defaultLanguage;
+
+    function collectInlineDefaults() {
+        const defaults = {};
+        document.querySelectorAll("[data-i18n]").forEach(element => {
+            defaults[element.dataset.i18n] = element.innerHTML.trim();
+        });
+        document.querySelectorAll("[data-i18n-attr]").forEach(element => {
+            element.dataset.i18nAttr.split(",").forEach(pair => {
+                const [attribute, key] = pair.split(":").map(value => value && value.trim());
+                if (attribute && key) {
+                    defaults[key] = element.getAttribute(attribute) || "";
+                }
+            });
+        });
+        return defaults;
+    }
+
+    dictionaries[defaultLanguage] = collectInlineDefaults();
+
+    function translate(key, params = {}) {
+        const dictionary = dictionaries[currentLanguage] || dictionaries[defaultLanguage] || {};
+        const fallbackDictionary = dictionaries[defaultLanguage] || {};
+        let value = dictionary[key] || fallbackDictionary[key] || key;
+        Object.entries(params).forEach(([name, paramValue]) => {
+            value = value.replaceAll(`{${name}}`, paramValue);
+        });
+        return value;
+    }
+
+    function applyTranslations() {
+        document.documentElement.lang = currentLanguage;
+        const translatedTitle = translate("site.title");
+        const translatedDescription = translate("site.description");
+        const descriptionTag = document.querySelector("meta[name='description']");
+        if (translatedTitle !== "site.title") {
+            document.title = translatedTitle;
+        }
+        if (descriptionTag && translatedDescription !== "site.description") {
+            descriptionTag.setAttribute("content", translatedDescription);
+        }
+        document.querySelectorAll("[data-i18n]").forEach(element => {
+            element.innerHTML = translate(element.dataset.i18n);
+        });
+        document.querySelectorAll("[data-i18n-attr]").forEach(element => {
+            element.dataset.i18nAttr.split(",").forEach(pair => {
+                const [attribute, key] = pair.split(":").map(value => value && value.trim());
+                if (attribute && key) {
+                    element.setAttribute(attribute, translate(key));
+                }
+            });
+        });
+        document.querySelectorAll("[data-lang]").forEach(button => {
+            const isActive = button.dataset.lang === currentLanguage;
+            button.classList.toggle("is-active", isActive);
+            button.setAttribute("aria-pressed", String(isActive));
+        });
+        listeners.forEach(listener => listener(currentLanguage));
+    }
+
+    async function loadDictionary(language) {
+        if (dictionaries[language]) return dictionaries[language];
+        const response = await fetch(`${language}.json`, { cache:"no-store" });
+        if (!response.ok) throw new Error(`Translation file not found: ${language}.json`);
+        dictionaries[language] = await response.json();
+        return dictionaries[language];
+    }
+
+    async function setLanguage(language) {
+        if (!supportedLanguages.includes(language)) return;
+        currentLanguage = language;
+        localStorage.setItem(storageKey, language);
+        try {
+            await loadDictionary(language);
+            if (language !== defaultLanguage) {
+                await loadDictionary(defaultLanguage);
+            }
+        } catch (error) {
+            if (!dictionaries[language]) {
+                dictionaries[language] = dictionaries[defaultLanguage] || {};
+            }
+        }
+        applyTranslations();
+    }
+
+    window.greenDesertI18n = {
+        apply: applyTranslations,
+        getLanguage: () => currentLanguage,
+        onChange(listener) {
+            listeners.add(listener);
+            return () => listeners.delete(listener);
+        },
+        ready: setLanguage(currentLanguage),
+        setLanguage,
+        t: translate
+    };
+
+    document.querySelectorAll("[data-lang]").forEach(button => {
+        button.addEventListener("click", () => setLanguage(button.dataset.lang));
+    });
+})();
+
 (() => {
     const photos = Array.from(document.querySelectorAll(".gallery-photo img"));
     const lightbox = document.querySelector(".gallery-lightbox");
@@ -1327,12 +1488,23 @@ footer{
         return lightbox.classList.contains("is-open");
     }
 
+    function updateGalleryLabels() {
+        const translator = window.greenDesertI18n;
+        photos.forEach(photo => {
+            const frame = photo.closest(".gallery-photo");
+            if (!frame) return;
+            const label = translator
+                ? translator.t("gallery.openPhoto", { alt:photo.alt || "" })
+                : (photo.alt ? `${photo.alt} buyuk goruntule` : "Fotografi buyuk goruntule");
+            frame.setAttribute("aria-label", label);
+        });
+    }
+
     photos.forEach((photo, index) => {
         const frame = photo.closest(".gallery-photo");
         if (!frame) return;
         frame.setAttribute("tabindex", "0");
         frame.setAttribute("role", "button");
-        frame.setAttribute("aria-label", photo.alt ? `${photo.alt} buyuk goruntule` : "Fotografi buyuk goruntule");
 
         frame.addEventListener("click", () => openLightbox(index));
         frame.addEventListener("keydown", event => {
@@ -1383,6 +1555,9 @@ footer{
             showPhoto(currentIndex + (deltaX < 0 ? 1 : -1));
         }
     }, { passive:true });
+
+    updateGalleryLabels();
+    window.greenDesertI18n?.onChange(updateGalleryLabels);
 })();
 
 (() => {
@@ -1396,9 +1571,12 @@ footer{
         { weight: "2000 gr", price: 0 },
         { weight: "5000 gr", price: 0 }
     ];
-    const bulkProductNames = new Set(["Organik Kuru Kayısı", "Organik Kuru Üzüm", "Kuru Kayısı", "Kuru Üzüm"]);
+    const bulkProductKeys = new Set(["organicApricot", "organicRaisin", "apricot", "raisin"]);
     const storageKey = "greenDesertCart";
-    const formatPrice = value => `${value} TL`;
+    const i18n = () => window.greenDesertI18n;
+    const t = key => i18n()?.t(key) || key;
+    const translatedProductName = (key, fallback) => key ? t(`products.items.${key}.name`) : fallback;
+    const formatPrice = value => `${value} ${t("cart.currency")}`;
     const cartTable = document.querySelector(".cart-table");
     const cartBody = document.querySelector("#cart-items");
     const cartEmpty = document.querySelector(".cart-empty");
@@ -1419,14 +1597,15 @@ footer{
 
     function renderOptions() {
         document.querySelectorAll(".product-card").forEach(card => {
+            const productKey = card.dataset.productKey;
             const productName = card.dataset.product;
             const panel = card.querySelector(".option-panel");
             if (!productName || !panel) return;
-            const productOptions = bulkProductNames.has(productName) ? bulkOptions : defaultOptions;
+            const productOptions = bulkProductKeys.has(productKey) ? bulkOptions : defaultOptions;
             panel.innerHTML = productOptions.map(option => `
                 <div class="option-row">
-                    <span>${option.weight} — ${formatPrice(option.price)}</span>
-                    <button class="add-cart" type="button" data-product="${productName}" data-weight="${option.weight}" data-price="${option.price}">Sepete Ekle</button>
+                    <span>${option.weight} - ${formatPrice(option.price)}</span>
+                    <button class="add-cart" type="button" data-product="${productName}" data-product-key="${productKey || ""}" data-weight="${option.weight}" data-price="${option.price}">${t("cart.add")}</button>
                 </div>
             `).join("");
         });
@@ -1455,12 +1634,12 @@ footer{
             total += itemTotal;
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td>${item.product}</td>
+                <td>${translatedProductName(item.productKey, item.product)}</td>
                 <td>${item.weight}</td>
                 <td>${formatPrice(item.price)}</td>
                 <td>${item.quantity}</td>
                 <td>${formatPrice(itemTotal)}</td>
-                <td><button class="cart-remove" type="button" data-key="${item.key}">Sil</button></td>
+                <td><button class="cart-remove" type="button" data-key="${item.key}">${t("cart.remove")}</button></td>
             `;
             cartBody.appendChild(row);
         });
@@ -1468,14 +1647,14 @@ footer{
         cartTotal.textContent = formatPrice(total);
     }
 
-    function addToCart(product, weight, price) {
+    function addToCart(productKey, product, weight, price) {
         const cart = readCart();
-        const key = `${product}-${weight}`;
+        const key = `${productKey || product}-${weight}`;
         const existing = cart.find(item => item.key === key);
         if (existing) {
             existing.quantity += 1;
         } else {
-            cart.push({ key, product, weight, price, quantity: 1 });
+            cart.push({ key, productKey, product, weight, price, quantity: 1 });
         }
         writeCart(cart);
         renderCart();
@@ -1492,7 +1671,7 @@ footer{
 
         const addButton = event.target.closest(".add-cart");
         if (addButton) {
-            addToCart(addButton.dataset.product, addButton.dataset.weight, Number(addButton.dataset.price || 0));
+            addToCart(addButton.dataset.productKey, addButton.dataset.product, addButton.dataset.weight, Number(addButton.dataset.price || 0));
             return;
         }
 
@@ -1506,6 +1685,14 @@ footer{
 
     renderOptions();
     renderCart();
+    window.greenDesertI18n?.ready.finally(() => {
+        renderOptions();
+        renderCart();
+    });
+    window.greenDesertI18n?.onChange(() => {
+        renderOptions();
+        renderCart();
+    });
 })();
 </script>
 </body>
