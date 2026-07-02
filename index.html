@@ -83,8 +83,8 @@ header{
     position:relative;
     overflow:hidden;
     text-align:center;
-    padding:86px 20px 96px;
-    min-height:640px;
+    padding:104px 20px 120px;
+    min-height:720px;
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -97,7 +97,7 @@ header::before{
     position:absolute;
     inset:-18px;
     background:url("31.jpeg") center/cover no-repeat;
-    filter:blur(5px);
+    filter:blur(2px) saturate(0.88) contrast(1.04);
     transform:scale(1.04);
     z-index:-2;
 }
@@ -107,50 +107,62 @@ header::after{
     position:absolute;
     inset:0;
     background:
-        linear-gradient(135deg,rgba(8,30,20,0.86),rgba(8,18,14,0.56) 48%,rgba(0,0,0,0.68)),
-        radial-gradient(circle at 50% 32%,rgba(214,178,104,0.24),transparent 42%);
+        linear-gradient(180deg,rgba(10,18,12,0.34),rgba(9,14,10,0.42) 42%,rgba(12,8,5,0.78)),
+        radial-gradient(circle at 50% 32%,rgba(236,213,168,0.34),transparent 36%),
+        radial-gradient(circle at 50% 78%,rgba(128,82,35,0.52),transparent 44%);
     z-index:-1;
+}
+
+.hero-scene{
+    position:relative;
+    z-index:1;
+    width:min(900px,92vw);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
 .logo-wrap{
     display:inline-flex;
     justify-content:center;
     align-items:center;
-    padding:16px 22px;
-    margin-bottom:30px;
-    border-radius:8px;
-    background:rgba(255,255,255,0.72);
-    border:1px solid rgba(255,255,255,0.52);
-    box-shadow:0 20px 55px rgba(0,0,0,0.22);
-    backdrop-filter:blur(12px);
+    padding:0;
+    margin-bottom:22px;
+    border-radius:0;
+    background:transparent;
+    border:0;
+    box-shadow:none;
+    backdrop-filter:none;
 }
 
 .logo{
-    width:210px;
+    width:190px;
     max-width:80%;
     border-radius:8px;
     display:block;
 }
 
 h1{
-    font-size:54px;
-    letter-spacing:8px;
+    font-size:64px;
+    letter-spacing:11px;
     margin:0;
-    color:#103b25;
-    text-shadow:0 2px 0 rgba(246,236,214,0.85),0 14px 32px rgba(0,0,0,0.58);
+    color:#6f9140;
+    font-family:Georgia, "Times New Roman", serif;
+    font-weight:500;
+    text-shadow:0 2px 0 rgba(16,36,18,0.72),0 18px 36px rgba(0,0,0,0.68);
 }
 
 .hero-text{
     max-width:720px;
-    margin:26px auto 0;
-    font-size:18px;
+    margin:24px auto 0;
+    font-size:20px;
     line-height:1.8;
     color:#ffffff;
     text-shadow:0 6px 20px rgba(0,0,0,0.55);
 }
 
 .buttons{
-    margin-top:35px;
+    margin-top:28px;
 }
 
 .btn{
@@ -164,16 +176,17 @@ h1{
 }
 
 .primary{
-    background:#31451f;
+    background:linear-gradient(135deg,#6d8f39,#36561f);
     color:#fff7e8;
-    box-shadow:0 14px 34px rgba(0,0,0,0.28);
+    box-shadow:0 16px 36px rgba(0,0,0,0.32),0 0 28px rgba(91,125,48,0.2);
 }
 
 .primary:hover,
 .primary:focus{
-    background:#45612b;
+    background:linear-gradient(135deg,#7da345,#45682a);
     transform:translateY(-2px);
 }
+
 
 .leaf-mark{
     display:inline-block;
@@ -387,7 +400,6 @@ section{
     font-size:14px;
     font-weight:600;
     letter-spacing:1px;
-    text-transform:lowercase;
 }
 
 .gallery-heading .section-title{
@@ -516,8 +528,8 @@ footer{
     }
 
     h1{
-        font-size:34px;
-        letter-spacing:4px;
+        font-size:36px;
+        letter-spacing:5px;
     }
 
     .hero-text{
@@ -530,7 +542,7 @@ footer{
     }
 
     .logo{
-        width:170px;
+        width:150px;
     }
 
     .features{
@@ -599,17 +611,19 @@ footer{
 </nav>
 
 <header id="anasayfa">
-    <div class="logo-wrap">
-        <img src="logo1.png" alt="Green Desert Life logosu" class="logo">
-    </div>
-    <h1>GREEN DESERT LIFE</h1>
+    <div class="hero-scene">
+        <div class="logo-wrap">
+            <img src="logo1.png" alt="Green Desert Life logosu" class="logo">
+        </div>
+        <h1>GREEN DESERT LIFE</h1>
 
-    <p class="hero-text">
-        Doğanın bereketi, insanın emeği, hayatın özü.
-    </p>
+        <p class="hero-text">
+            Doğanın bereketi, insanın emeği, hayatın özü.
+        </p>
 
-    <div class="buttons">
-        <a href="#urunler" class="btn primary"><span class="leaf-mark" aria-hidden="true"></span>Ürünleri Keşfet</a>
+        <div class="buttons">
+            <a href="#urunler" class="btn primary"><span class="leaf-mark" aria-hidden="true"></span>Ürünleri Keşfet</a>
+        </div>
     </div>
 </header>
 
@@ -749,5 +763,13 @@ footer{
 <footer>
     © 2026 Green Desert Life - Doğanın Sırrı. Yaşamın Uyanışı.
 </footer>
+<noscript>
+    <style>
+        .logo-wrap,
+        h1,
+        .hero-text,
+        .buttons{opacity:1;transform:none}
+    </style>
+</noscript>
 </body>
 </html>
