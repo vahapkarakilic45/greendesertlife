@@ -3,16 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Green Desert Life</title>
+<meta name="description" content="Green Desert Life; Malatya kayısısı, dağ çayı, lavanta ve dağ kekiğini doğallık, emek ve adil ticaret anlayışıyla buluşturan yerel bir yaşam markasıdır.">
+<meta name="theme-color" content="#183d2b">
+<title>Green Desert Life | Doğanın Bereketi, İnsanın Emeği</title>
 
 <style>
 *{box-sizing:border-box}
+
+html{
+    scroll-behavior:smooth;
+}
 
 body{
     margin:0;
     font-family:Arial, sans-serif;
     background:#f3ead8;
     color:#183d2b;
+}
+
+img{
+    max-width:100%;
+}
+
+.skip-link{
+    position:absolute;
+    left:16px;
+    top:-60px;
+    background:#183d2b;
+    color:#fff7e8;
+    padding:10px 14px;
+    border-radius:6px;
+    z-index:20;
+    transition:top 0.2s ease;
+}
+
+.skip-link:focus{
+    top:16px;
 }
 
 nav{
@@ -24,6 +50,7 @@ nav{
     display:flex;
     justify-content:space-between;
     align-items:center;
+    gap:24px;
     border-bottom:1px solid rgba(24,61,43,0.15);
     z-index:10;
 }
@@ -31,13 +58,25 @@ nav{
 nav .brand{
     font-weight:bold;
     letter-spacing:3px;
+    white-space:nowrap;
+}
+
+.nav-links{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+    gap:10px 22px;
 }
 
 nav a{
     color:#183d2b;
     text-decoration:none;
-    margin-left:22px;
     font-size:14px;
+}
+
+nav a:hover,
+nav a:focus{
+    color:#2e7d32;
 }
 
 header{
@@ -79,7 +118,7 @@ header::after{
     align-items:center;
     padding:16px 22px;
     margin-bottom:30px;
-    border-radius:24px;
+    border-radius:8px;
     background:rgba(255,255,255,0.72);
     border:1px solid rgba(255,255,255,0.52);
     box-shadow:0 20px 55px rgba(0,0,0,0.22);
@@ -89,7 +128,7 @@ header::after{
 .logo{
     width:210px;
     max-width:80%;
-    border-radius:16px;
+    border-radius:8px;
     display:block;
 }
 
@@ -130,7 +169,8 @@ h1{
     box-shadow:0 14px 34px rgba(0,0,0,0.28);
 }
 
-.primary:hover{
+.primary:hover,
+.primary:focus{
     background:#45612b;
     transform:translateY(-2px);
 }
@@ -146,9 +186,10 @@ h1{
     vertical-align:-1px;
 }
 
-.secondary{
-    border:1px solid #183d2b;
-    color:#183d2b;
+main{
+    background:
+        linear-gradient(180deg,rgba(243,234,216,0) 0%,#f3ead8 22%),
+        linear-gradient(90deg,rgba(46,125,50,0.08),rgba(210,180,140,0.12),rgba(79,195,247,0.07));
 }
 
 section{
@@ -235,7 +276,15 @@ section{
 .section-title{
     text-align:center;
     font-size:34px;
-    margin-bottom:45px;
+    margin:0 0 45px;
+}
+
+.section-intro{
+    max-width:760px;
+    margin:-22px auto 42px;
+    text-align:center;
+    line-height:1.8;
+    color:#4b5542;
 }
 
 .products{
@@ -245,10 +294,10 @@ section{
 }
 
 .card{
-    background:rgba(255,255,255,0.72);
-    padding:30px;
-    border-radius:24px;
-    text-align:center;
+    overflow:hidden;
+    background:rgba(255,255,255,0.78);
+    border:1px solid rgba(24,61,43,0.08);
+    border-radius:8px;
     box-shadow:0 15px 35px rgba(0,0,0,0.10);
     transition:0.3s;
 }
@@ -257,13 +306,21 @@ section{
     transform:translateY(-6px);
 }
 
+.card-body{
+    padding:24px;
+    text-align:center;
+}
+
 .card h3{
     font-size:23px;
+    margin:0 0 12px;
 }
 
 .card p{
     color:#4b5542;
     line-height:1.7;
+    min-height:82px;
+    margin:0;
 }
 
 .price{
@@ -281,9 +338,15 @@ section{
     font-size:14px;
 }
 
+.buy:hover,
+.buy:focus{
+    background:#2e7d32;
+}
+
 .story{
-    background:rgba(255,255,255,0.45);
-    border-radius:30px;
+    background:rgba(255,255,255,0.48);
+    border:1px solid rgba(24,61,43,0.08);
+    border-radius:8px;
     max-width:950px;
     margin:auto;
     padding:45px;
@@ -292,34 +355,159 @@ section{
     text-align:center;
 }
 
+.story p{
+    margin:0 0 18px;
+}
+
+.story p:last-child{
+    margin-bottom:0;
+}
+
+.quote{
+    font-size:22px;
+    color:#31451f;
+    font-weight:bold;
+}
+
+.gallery-section{
+    background:rgba(255,255,255,0.22);
+    padding-top:96px;
+    padding-bottom:104px;
+}
+
+.gallery-heading{
+    text-align:center;
+    max-width:780px;
+    margin:0 auto 52px;
+}
+
+.section-kicker{
+    margin:0 0 10px;
+    color:#2e7d32;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:lowercase;
+}
+
+.gallery-heading .section-title{
+    margin-bottom:16px;
+    font-size:29px;
+    font-weight:500;
+}
+
+.gallery-description{
+    max-width:650px;
+    margin:0 auto;
+    color:#4b5542;
+    line-height:1.8;
+}
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:24px;
+}
+
+.gallery-placeholder{
+    aspect-ratio:4/3;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    background:#f8f6f1;
+    border:1px solid #d8e4d1;
+    border-radius:16px;
+    color:#49633f;
+    cursor:pointer;
+    transition:transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.gallery-placeholder:hover,
+.gallery-placeholder:focus-within{
+    transform:scale(1.02);
+    border-color:#b7d2ab;
+    box-shadow:0 20px 38px rgba(46,125,50,0.18);
+}
+
+.gallery-icon{
+    width:34px;
+    height:34px;
+    border-radius:34px 4px 34px 4px;
+    background:linear-gradient(135deg,#2e7d32,#9dbb73);
+    transform:rotate(-18deg);
+    opacity:0.82;
+}
+
+.gallery-footer{
+    max-width:650px;
+    margin:54px auto 0;
+    padding-top:22px;
+    border-top:1px solid #d8e4d1;
+    text-align:center;
+    color:#31451f;
+    font-size:18px;
+    font-weight:500;
+}
+
+.contact-actions{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+    margin-top:24px;
+}
+
 .whatsapp{
     position:fixed;
     right:22px;
     bottom:22px;
-    background:#25D366;
+    background:#25d366;
     color:white;
     padding:15px 22px;
     border-radius:40px;
     text-decoration:none;
     font-weight:bold;
     box-shadow:0 10px 25px rgba(0,0,0,0.25);
+    z-index:9;
+}
+
+.whatsapp:hover,
+.whatsapp:focus{
+    background:#1fae56;
 }
 
 footer{
     background:#183d2b;
     color:#f5ead5;
     text-align:center;
-    padding:35px;
+    padding:35px 24px 86px;
+}
+
+@media(max-width:900px){
+    .features{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .gallery-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
 }
 
 @media(max-width:700px){
     nav{
-        flex-direction:column;
+        align-items:flex-start;
         gap:12px;
     }
 
+    .nav-links{
+        justify-content:flex-start;
+        gap:8px 16px;
+    }
+
     nav a{
-        margin:0 8px;
+        margin:0;
     }
 
     header{
@@ -346,7 +534,6 @@ footer{
     }
 
     .features{
-        grid-template-columns:1fr 1fr;
         gap:12px;
         padding:26px 6%;
         margin-top:-30px;
@@ -356,30 +543,69 @@ footer{
         padding:18px 12px;
         font-size:14px;
     }
+
+    section{
+        padding:58px 6%;
+    }
+
+    .story{
+        padding:28px 22px;
+        font-size:16px;
+        text-align:left;
+    }
+
+    .quote{
+        text-align:center;
+        font-size:20px;
+    }
+
+    .gallery-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:16px;
+    }
+
+    .gallery-placeholder{
+        border-radius:16px;
+    }
+
+    .whatsapp{
+        right:16px;
+        bottom:16px;
+        padding:13px 18px;
+    }
+}
+
+@media(max-width:420px){
+    .gallery-grid{
+        grid-template-columns:1fr;
+    }
 }
 </style>
 </head>
 
 <body>
+<a class="skip-link" href="#icerik">İçeriğe geç</a>
 
-<nav>
+<nav aria-label="Ana menü">
     <div class="brand">GREENDESERT LIFE</div>
-    <div>
+    <div class="nav-links">
         <a href="#anasayfa">Ana Sayfa</a>
         <a href="#urunler">Ürünler</a>
         <a href="#hikaye">Hakkımızda</a>
+        <a href="#organik-tarim">Organik Tarım ve Sertifikamız</a>
+        <a href="#galeri">Galeri</a>
         <a href="#iletisim">İletişim</a>
     </div>
 </nav>
 
 <header id="anasayfa">
     <div class="logo-wrap">
-        <img src="logo1.png" alt="Green Desert Life Logo" class="logo">
+        <img src="logo1.png" alt="Green Desert Life logosu" class="logo">
     </div>
     <h1>GREEN DESERT LIFE</h1>
 
     <p class="hero-text">
-        Doğanın bereketi, insanın emeği, Hayatın özü
+        Doğanın bereketi, insanın emeği, hayatın özü.
     </p>
 
     <div class="buttons">
@@ -387,85 +613,138 @@ footer{
     </div>
 </header>
 
-<section class="features" aria-label="Green Desert Life özellikleri">
-    <div class="feature-card">
-        <span class="feature-icon feature-leaf" aria-hidden="true"></span>
-        Doğal & Katkısız
-    </div>
-    <div class="feature-card">
-        <span class="feature-icon feature-mountain" aria-hidden="true"></span>
-        Yüksek Rakım
-    </div>
-    <div class="feature-card">
-        <span class="feature-icon feature-cycle" aria-hidden="true"></span>
-        Sürdürülebilir
-    </div>
-    <div class="feature-card">
-        <span class="feature-icon feature-seal" aria-hidden="true"></span>
-        Güvenilir & Şeffaf
-    </div>
-</section>
+<main id="icerik">
+    <section class="features" aria-label="Green Desert Life özellikleri">
+        <div class="feature-card">
+            <span class="feature-icon feature-leaf" aria-hidden="true"></span>
+            Doğal & Katkısız
+        </div>
+        <div class="feature-card">
+            <span class="feature-icon feature-mountain" aria-hidden="true"></span>
+            Yüksek Rakım
+        </div>
+        <div class="feature-card">
+            <span class="feature-icon feature-cycle" aria-hidden="true"></span>
+            Sürdürülebilir
+        </div>
+        <div class="feature-card">
+            <span class="feature-icon feature-seal" aria-hidden="true"></span>
+            Güvenilir & Şeffaf
+        </div>
+    </section>
 
-<section id="urunler">
-    <h2 class="section-title">Doğal Ürünler</h2>
+    <section id="urunler">
+        <h2 class="section-title">Doğal Ürünler</h2>
+        <p class="section-intro">
+            Malatya'nın güneşi, dağların kokusu ve yerel üreticinin emeği; sade, temiz ve güvenilir ürünlerde buluşur.
+        </p>
 
-    <div class="products">
-        <div class="card">
-            <h3>Kayısı</h3>
-            <p>Malatya'nın güneşiyle olgunlaşan doğal kayısı ürünleri.</p>
-            <div class="price">Yakında satışta</div>
-            <a class="buy" href="#iletisim">İncele</a>
+        <div class="products">
+            <article class="card">
+                <div class="card-body">
+                    <h3>Kayısı</h3>
+                    <p>Malatya'nın güneşiyle olgunlaşan doğal kayısı ürünleri.</p>
+                    <div class="price">Yakında satışta</div>
+                    <a class="buy" href="#iletisim" aria-label="Kayısı için iletişime geç">İncele</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-body">
+                    <h3>Dağ Çayı</h3>
+                    <p>Yüksek rakımın ferah ve sade aromasını taşıyan bitki çayı.</p>
+                    <div class="price">Yakında satışta</div>
+                    <a class="buy" href="#iletisim" aria-label="Dağ çayı için iletişime geç">İncele</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-body">
+                    <h3>Lavanta</h3>
+                    <p>Doğal kokusu ve sakinleştirici atmosferiyle lavanta ürünleri.</p>
+                    <div class="price">Yakında satışta</div>
+                    <a class="buy" href="#iletisim" aria-label="Lavanta için iletişime geç">İncele</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-body">
+                    <h3>Dağ Kekiği</h3>
+                    <p>Doğadan gelen güçlü aroma ve geleneksel lezzet.</p>
+                    <div class="price">Yakında satışta</div>
+                    <a class="buy" href="#iletisim" aria-label="Dağ kekiği için iletişime geç">İncele</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section id="hikaye">
+        <h2 class="section-title">Marka Hikayesi</h2>
+
+        <div class="story">
+            <p>
+                Green Desert Life, çölün zorlu tabiatında yeşeren tohumun hikayesidir. Yaşamın karşıtlıklar içinden yeniden filizlenmesini; kuraklıkla bereketin, emekle umudun aynı bütünün parçaları olduğunu anlatır.
+            </p>
+            <p>
+                Logodaki "G", insanı, bitkiyi, toprağı ve suyu aynı yaşam ağının parçası olarak gören Gaia düşüncesine bir göndermedir. Bizler o büyük organizmanın küçük bir parçasıyız.
+            </p>
+            <p>
+                Malatya'nın kayısısını, dağların çayını, lavantasını ve kekiğini en doğal haliyle dostlarımıza ulaştırmak için yola çıktık. Amacımız yalnızca ürün sunmak değil; doğayla bağ kuran, üreticiyle tüketici arasında güven oluşturan bir yaşam deneyimi paylaşmaktır.
+            </p>
+            <p class="quote">"Adil dükkanda pazarlık olmaz."</p>
+        </div>
+    </section>
+
+    <section id="organik-tarim">
+        <h2 class="section-title">Organik Tarım ve Sertifikamız</h2>
+
+        <div class="story">
+            <p>
+                Üretim yaklaşımımızda toprağın dengesini, yerel emeği ve doğaya saygıyı merkeze alıyoruz. Sertifika ve süreç bilgilerimizi netleştikçe bu alanda paylaşacağız.
+            </p>
+        </div>
+    </section>
+
+    <section id="galeri" class="gallery-section" aria-labelledby="galeri-baslik">
+        <div class="gallery-heading">
+            <p class="section-kicker">Galeri</p>
+            <h2 id="galeri-baslik" class="section-title">Üretim Sürecinden Kareler</h2>
+            <p class="gallery-description">
+                Topraktan sofranıza uzanan yolculuğumuzun her adımını doğaya saygı ve özenle gerçekleştiriyoruz.
+            </p>
         </div>
 
-        <div class="card">
-            <h3>Dağ Çayı</h3>
-            <p>Yüksek rakımın ferah ve sade aromasını taşıyan bitki çayı.</p>
-            <div class="price">Yakında satışta</div>
-            <a class="buy" href="#iletisim">İncele</a>
+        <div class="gallery-grid" aria-label="Yakında eklenecek üretim fotoğrafları">
+            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
+            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
+            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
+            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
+            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
+            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
+            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
+            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
+            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
+            <div class="gallery-placeholder" aria-label="Galeri fotoğraf alanı"><span class="gallery-icon" aria-hidden="true"></span></div>
         </div>
 
-        <div class="card">
-            <h3>Lavanta</h3>
-            <p>Doğal kokusu ve sakinleştirici atmosferiyle lavanta ürünleri.</p>
-            <div class="price">Yakında satışta</div>
-            <a class="buy" href="#iletisim">İncele</a>
+        <p class="gallery-footer">Doğadan gelen kalite, güvenle sofranıza.</p>
+    </section>
+
+    <section id="iletisim">
+        <h2 class="section-title">İletişim</h2>
+
+        <div class="story">
+            <p>
+                Sipariş, ürün bilgisi ve iş birliği için bizimle WhatsApp üzerinden iletişime geçebilirsiniz.
+            </p>
+            <div class="contact-actions">
+                <a class="buy" href="https://wa.me/905056591153" target="_blank" rel="noopener">WhatsApp'tan Yaz</a>
+            </div>
         </div>
+    </section>
+</main>
 
-        <div class="card">
-            <h3>Dağ Kekiği</h3>
-            <p>Doğadan gelen güçlü aroma ve geleneksel lezzet.</p>
-            <div class="price">Yakında satışta</div>
-            <a class="buy" href="#iletisim">İncele</a>
-        </div>
-    </div>
-</section>
-
-<section id="hikaye">
-    <h2 class="section-title">Marka Hikayesi</h2>
-
-    <div class="story">
-        Greendesert life, çölün zorlu tabiatında yeşeren tohumun metaforik somutlanmasıdır.
-        Yaşamın diyalektik gelişiminin anlatımıdır. Türlü zorlukların ve çelişkilerin bir arada yeni bir hayat var etmeleridir.
-        "G" hiçlikten var olan Gaia'nın yansımasıdır.
-        Yaşamın sırrı, çölün kuraklığı ile yağmur ormanlarının var oluşunu birbirine bağlayan zorunluluklardır.
-        Hayatın o derin var olma tutkusu Hiroşima'da yeşeren ilk zakkum özünde gizlidir. Bizler de tabiatın bizlere sunduğu bu armağanları
-        dostlarımıza ulaştırmak ve onlara sunabilmek adına yola çıktık. Bunu yaparken de ezberimizde tek cümle olacak:
-        "Bizler o büyük organizmanın küçük bir parçasıyız."
-        Greendesert life bir satış platformundan öte bir yaşam deneyimi amaçlamaktadır. Üretim ve satış ilkelerimiz
-        Anadolu'nun köklü geleneği olan Ahilik geleneğinden esinlenecektir.
-        Mottomuz "Adil dükkanda pazarlık olmaz."
-    </div>
-</section>
-
-<section id="iletisim">
-    <h2 class="section-title">İletişim</h2>
-
-    <div class="story">
-        Sipariş, ürün bilgisi ve iş birliği için bizimle WhatsApp üzerinden iletişime geçebilirsiniz.
-    </div>
-</section>
-
-<a class="whatsapp" href="https://wa.me/905056591153" target="_blank">WhatsApp</a>
+<a class="whatsapp" href="https://wa.me/905056591153" target="_blank" rel="noopener" aria-label="Green Desert Life WhatsApp hattı">WhatsApp</a>
 
 <footer>
     © 2026 Green Desert Life - Doğanın Sırrı. Yaşamın Uyanışı.
