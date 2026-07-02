@@ -596,14 +596,16 @@ section{
     border-radius:16px;
     background:#f8f6f1;
     box-shadow:0 14px 28px rgba(24,61,43,0.1);
-    transition:transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor:pointer;
+    transition:transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    will-change:transform;
 }
 
 .gallery-photo:hover,
 .gallery-photo:focus-within{
-    transform:scale(1.02);
+    transform:translateY(-6px) scale(1.08);
     border-color:#b7d2ab;
-    box-shadow:0 20px 38px rgba(46,125,50,0.18);
+    box-shadow:0 22px 46px rgba(24,61,43,0.24);
 }
 
 .gallery-photo img{
@@ -611,6 +613,7 @@ section{
     height:100%;
     object-fit:cover;
     display:block;
+    pointer-events:none;
 }
 
 .gallery-footer{
@@ -622,6 +625,86 @@ section{
     color:#31451f;
     font-size:18px;
     font-weight:500;
+}
+
+.gallery-lightbox{
+    position:fixed;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:6vh 7vw;
+    background:rgba(0,0,0,0.7);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity 0.28s ease, visibility 0.28s ease;
+    z-index:30;
+}
+
+.gallery-lightbox.is-open{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+}
+
+.gallery-lightbox__image{
+    max-width:80vw;
+    max-height:80vh;
+    width:auto;
+    height:auto;
+    object-fit:contain;
+    border-radius:14px;
+    box-shadow:0 28px 70px rgba(0,0,0,0.38);
+    transform:scale(0.96);
+    transition:transform 0.28s ease;
+    user-select:none;
+}
+
+.gallery-lightbox.is-open .gallery-lightbox__image{
+    transform:scale(1);
+}
+
+.gallery-lightbox__button{
+    position:absolute;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:48px;
+    height:48px;
+    border:1px solid rgba(255,255,255,0.34);
+    border-radius:50%;
+    background:rgba(24,61,43,0.58);
+    color:#fff7e8;
+    font-size:34px;
+    line-height:1;
+    cursor:pointer;
+    transition:background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.gallery-lightbox__button:hover,
+.gallery-lightbox__button:focus{
+    background:rgba(46,125,50,0.82);
+    border-color:rgba(255,255,255,0.62);
+    transform:scale(1.06);
+}
+
+.gallery-lightbox__button--close{
+    top:22px;
+    right:22px;
+    font-size:32px;
+}
+
+.gallery-lightbox__button--prev{
+    left:24px;
+}
+
+.gallery-lightbox__button--next{
+    right:24px;
+}
+
+body.lightbox-open{
+    overflow:hidden;
 }
 
 .contact-actions{
@@ -829,6 +912,34 @@ footer{
 
     .gallery-placeholder{
         border-radius:16px;
+    }
+
+    .gallery-lightbox{
+        padding:72px 16px;
+    }
+
+    .gallery-lightbox__image{
+        max-width:86vw;
+        max-height:78vh;
+    }
+
+    .gallery-lightbox__button{
+        width:42px;
+        height:42px;
+        font-size:28px;
+    }
+
+    .gallery-lightbox__button--close{
+        top:16px;
+        right:16px;
+    }
+
+    .gallery-lightbox__button--prev{
+        left:12px;
+    }
+
+    .gallery-lightbox__button--next{
+        right:12px;
     }
 
     .whatsapp{
@@ -1090,6 +1201,13 @@ footer{
         <p class="gallery-footer">Doğadan gelen kalite, güvenle sofranıza.</p>
     </section>
 
+    <div class="gallery-lightbox" aria-hidden="true" role="dialog" aria-label="Galeri fotograf goruntuleyici">
+        <button class="gallery-lightbox__button gallery-lightbox__button--close" type="button" aria-label="Kapat">&times;</button>
+        <button class="gallery-lightbox__button gallery-lightbox__button--prev" type="button" aria-label="Onceki fotograf">&#8249;</button>
+        <img class="gallery-lightbox__image" src="" alt="">
+        <button class="gallery-lightbox__button gallery-lightbox__button--next" type="button" aria-label="Sonraki fotograf">&#8250;</button>
+    </div>
+
     <section id="sepetim" class="cart-section">
         <h2 class="section-title">Sepetim</h2>
         <div class="cart-wrap" aria-live="polite">
@@ -1142,6 +1260,109 @@ footer{
     </style>
 </noscript>
 <script>
+(() => {
+    const photos = Array.from(document.querySelectorAll(".gallery-photo img"));
+    const lightbox = document.querySelector(".gallery-lightbox");
+    const lightboxImage = document.querySelector(".gallery-lightbox__image");
+    const closeButton = document.querySelector(".gallery-lightbox__button--close");
+    const prevButton = document.querySelector(".gallery-lightbox__button--prev");
+    const nextButton = document.querySelector(".gallery-lightbox__button--next");
+
+    if (!photos.length || !lightbox || !lightboxImage || !closeButton || !prevButton || !nextButton) return;
+
+    let currentIndex = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let lastFocusedElement = null;
+
+    function showPhoto(index) {
+        currentIndex = (index + photos.length) % photos.length;
+        const photo = photos[currentIndex];
+        lightboxImage.src = photo.currentSrc || photo.src;
+        lightboxImage.alt = photo.alt || "";
+    }
+
+    function openLightbox(index) {
+        lastFocusedElement = document.activeElement;
+        showPhoto(index);
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.classList.add("lightbox-open");
+        closeButton.focus();
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("lightbox-open");
+        lightboxImage.removeAttribute("src");
+        if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+            lastFocusedElement.focus();
+        }
+    }
+
+    function isLightboxOpen() {
+        return lightbox.classList.contains("is-open");
+    }
+
+    photos.forEach((photo, index) => {
+        const frame = photo.closest(".gallery-photo");
+        if (!frame) return;
+        frame.setAttribute("tabindex", "0");
+        frame.setAttribute("role", "button");
+        frame.setAttribute("aria-label", photo.alt ? `${photo.alt} buyuk goruntule` : "Fotografi buyuk goruntule");
+
+        frame.addEventListener("click", () => openLightbox(index));
+        frame.addEventListener("keydown", event => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                openLightbox(index);
+            }
+        });
+    });
+
+    closeButton.addEventListener("click", closeLightbox);
+    prevButton.addEventListener("click", () => showPhoto(currentIndex - 1));
+    nextButton.addEventListener("click", () => showPhoto(currentIndex + 1));
+
+    lightbox.addEventListener("click", event => {
+        if (event.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    document.addEventListener("keydown", event => {
+        if (!isLightboxOpen()) return;
+
+        if (event.key === "Escape") {
+            closeLightbox();
+        } else if (event.key === "ArrowLeft") {
+            showPhoto(currentIndex - 1);
+        } else if (event.key === "ArrowRight") {
+            showPhoto(currentIndex + 1);
+        }
+    });
+
+    lightbox.addEventListener("touchstart", event => {
+        if (!isLightboxOpen() || event.touches.length !== 1) return;
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+    }, { passive:true });
+
+    lightbox.addEventListener("touchend", event => {
+        if (!isLightboxOpen() || event.changedTouches.length !== 1) return;
+
+        const touchEndX = event.changedTouches[0].clientX;
+        const touchEndY = event.changedTouches[0].clientY;
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
+
+        if (Math.abs(deltaX) > 48 && Math.abs(deltaX) > Math.abs(deltaY) * 1.4) {
+            showPhoto(currentIndex + (deltaX < 0 ? 1 : -1));
+        }
+    }, { passive:true });
+})();
+
 (() => {
     const defaultOptions = [
         { weight: "250 gr", price: 0 },
